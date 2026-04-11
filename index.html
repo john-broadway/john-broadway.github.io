@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>John Broadway</title>
+<style>
+:root{--bg:#0d1117;--surface:#161b22;--border:#30363d;--text:#e6edf3;--muted:#8b949e;--accent:#58a6ff;--accent-dim:#1f6feb}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;max-width:800px;margin:0 auto;padding:2rem 1.5rem}
+h1{font-size:2rem;margin-bottom:.25rem}h2{font-size:1.4rem;margin:2.5rem 0 1rem;color:var(--accent);border-bottom:1px solid var(--border);padding-bottom:.5rem}h3{font-size:1.1rem;margin:1.5rem 0 .5rem}
+p{margin-bottom:1rem;color:var(--muted)}p.lead{color:var(--text);font-size:1.1rem}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.subtitle{color:var(--muted);font-size:1rem;margin-bottom:2rem}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.25rem;margin-bottom:1rem}
+.card h3{margin-top:0;color:var(--text)}.card p{margin-bottom:.5rem}.card .meta{font-size:.85rem;color:var(--muted)}
+.tag{display:inline-block;background:var(--accent-dim);color:var(--text);padding:.15rem .5rem;border-radius:12px;font-size:.8rem;margin-right:.25rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.75rem;margin:1rem 0}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem;text-align:center}
+.stat .number{font-size:1.5rem;font-weight:bold;color:var(--accent)}.stat .label{font-size:.8rem;color:var(--muted)}
+footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--border);color:var(--muted);font-size:.85rem}
+</style>
+</head>
+<body>
+<h1>John Broadway</h1>
+<div class="subtitle">Independent AI researcher and infrastructure architect</div>
+<p class="lead">I build sovereign AI systems on bare metal. No cloud, no SaaS, no shortcuts. Two NVIDIA DGX Sparks, a constitutional governance framework, and the belief that you can do more with less if you size everything right.</p>
+<p>I'm a retired disabled U.S. veteran. I don't have a team, a lab, or a budget. What I have is 25 years of building things that work and an engineering instinct that says the right small solution beats the wrong big one every time.</p>
+<p>I think in analogies. Bandpass boxes and speaker impedance. Series and parallel wiring. Matching the driver to the enclosure to the cabin volume. The same physics applies to neural networks &mdash; right-size the model, tune the circuits, extract maximum performance from minimum hardware.</p>
+<h2>Research</h2>
+<div class="card">
+<h3>RYS on Small Language Models &mdash; First Sub-14B Results</h3>
+<p>Extended David Ng's RYS (Repeat Your Self) layer duplication technique to models as small as 600M parameters. Swept 4 model sizes across 300+ configurations and found reasoning circuits at every scale &mdash; something the community assumed didn't exist below 14B.</p>
+<div class="stats">
+<div class="stat"><div class="number">0.6B</div><div class="label">Smallest model with circuits</div></div>
+<div class="stat"><div class="number">300+</div><div class="label">Configurations tested</div></div>
+<div class="stat"><div class="number">4</div><div class="label">Model scales</div></div>
+<div class="stat"><div class="number">$0</div><div class="label">Training cost</div></div>
+</div>
+<p class="meta"><span class="tag">RYS</span><span class="tag">SLM</span><span class="tag">Qwen3</span><span class="tag">NVIDIA GB10</span> Status: Data collection in progress. Models and full datasets publishing soon.</p>
+</div>
+<h2>Projects</h2>
+<div class="card">
+<h3>The Continental</h3>
+<p>A framework for sovereign AI agents. Each Room Agent governs its own domain &mdash; databases, monitoring, security, manufacturing &mdash; with its own memory, its own model, and its own authority. Governed by a formal constitution with 11 articles, a bill of rights, and amendment process.</p>
+<p>58 rooms across 4 sites. Self-healing, self-learning, self-governing.</p>
+<p class="meta"><span class="tag">Multi-Agent</span><span class="tag">Constitutional AI</span><span class="tag">Self-Hosted</span></p>
+</div>
+<div class="card">
+<h3>Sovereign Model Fleet</h3>
+<p>Per-room AI models running on bare metal. RYS-enhanced base models with LoRA domain adapters, served via vLLM with multi-adapter routing. Each agent gets a brain tuned to its job &mdash; a database room thinks in SQL, a document room thinks in compliance, a manager thinks in escalation patterns.</p>
+<p>Two NVIDIA DGX Sparks (GB10, 128GB unified each). Training and serving simultaneously. No cloud dependency.</p>
+<p class="meta"><span class="tag">vLLM</span><span class="tag">LoRA</span><span class="tag">DGX Spark</span><span class="tag">Bare Metal</span></p>
+</div>
+<div class="card">
+<h3><a href="https://github.com/john-broadway/maude-for-claude">Maude for Claude</a></h3>
+<p>Configuration authority toolkit for Claude Code. Named after the character who always knows where everything is.</p>
+<p class="meta"><span class="tag">Open Source</span><span class="tag">Apache 2.0</span><span class="tag">1,443 tests</span></p>
+</div>
+<h2>Hardware</h2>
+<p>Everything runs self-hosted on infrastructure I built and maintain:</p>
+<div class="stats">
+<div class="stat"><div class="number">2</div><div class="label">DGX Sparks (GB10)</div></div>
+<div class="stat"><div class="number">256GB</div><div class="label">Unified GPU Memory</div></div>
+<div class="stat"><div class="number">58</div><div class="label">Room Agents</div></div>
+<div class="stat"><div class="number">4</div><div class="label">Sites</div></div>
+</div>
+<h2>Contact</h2>
+<p>GitHub: <a href="https://github.com/john-broadway">john-broadway</a><br>Email: 271895126+john-broadway@users.noreply.github.com</p>
+<footer>Built independently by John Broadway. No affiliation with any corporation.<br>The work speaks for itself.</footer>
+</body>
+</html>
