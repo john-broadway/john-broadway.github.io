@@ -10,7 +10,7 @@ Single-file static site — `index.html` is self-contained: HTML5 + embedded CSS
 - Personal context: veteran, no team / lab / budget, 25 years of work
 - "I think in analogies" — physics-of-systems framing
 - **Research** card: RYS on small language models, sub-14B results
-- **Projects** cards: Sovereign Model Fleet, Maude for Claude
+- **Projects** card: Maude for Claude
 - **Values** list: AI partnership, sovereign-by-default, right-sized systems, governance-as-code
 - **Buddy**: Zestgobble (rare goose)
 - **Elsewhere** links: GitHub, Hugging Face, Maude for Claude
