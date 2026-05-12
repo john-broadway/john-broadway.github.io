@@ -1,0 +1,17 @@
+title: John Broadway
+description: Independent AI researcher and infrastructure architect. Sovereign AI systems on bare metal.
+url: https://john-broadway.github.io
+author: John Broadway
+
+permalink: pretty
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor/

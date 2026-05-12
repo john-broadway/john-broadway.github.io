@@ -2,7 +2,7 @@
 
 Source for [john-broadway.github.io](https://john-broadway.github.io).
 
-Single-file static site — `index.html` is self-contained: HTML5 + embedded CSS, no build step, no external fonts, no JavaScript. Served straight off GitHub Pages.
+Jekyll on GitHub Pages — no Actions, builds on push. Page content with front matter in `index.html`; layout chrome in `_layouts/`; styles in `assets/style.css`; site config in `_config.yml`. No external fonts, no JavaScript.
 
 ## Content
 
@@ -17,7 +17,8 @@ Single-file static site — `index.html` is self-contained: HTML5 + embedded CSS
 
 ## Editing
 
-Open `index.html`. All styles are in the `<style>` block at the top. Color tokens live in `:root`. Sections are commented:
+- **Page content:** `index.html` — body markup with Jekyll front matter at the top setting layout, title, and description.
+- **Styles:** `assets/style.css`. Color tokens in `:root`. Sections commented:
 
 ```
 /* ── Header ─────────── */
@@ -30,6 +31,17 @@ Open `index.html`. All styles are in the `<style>` block at the top. Color token
 /* ── Buddy block ─────── */
 /* ── Footer ─────────── */
 ```
+
+- **Layouts:** `_layouts/default.html` wraps the page (head, body, SEO tags via `jekyll-seo-tag`). `_layouts/page.html` and `_layouts/post.html` extend it.
+- **Site config:** `_config.yml`.
+
+Local preview (Docker, no Ruby install needed):
+
+```
+docker run --rm -v "$PWD:/srv/jekyll" -p 4000:4000 jekyll/jekyll:4 jekyll serve --watch
+```
+
+Or skip preview — push to main; GitHub Pages deploys on push (~30s).
 
 ## License
 
