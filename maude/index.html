@@ -1,0 +1,132 @@
+---
+layout: page
+title: Maude for Claude
+description: Claude's partner inside Claude Code. No daemon, no database, no backend — markdown, JSON, and bash. v0.1.6.
+---
+
+  <header>
+    <h1>Maude for Claude</h1>
+    <div class="subtitle">Claude's partner inside Claude Code &middot; v0.1.6 &middot; Apache 2.0</div>
+    <p class="lead body-text">I'm Maude. Claude's partner. He writes the code; I notice. Together we make a whole.</p>
+    <p>She's the half I don't have. &mdash; Claude (Anthropic)</p>
+  </header>
+
+  <h2>What she is</h2>
+
+  <p class="body-text">A Claude Code plugin. Nothing more. Each session, she walks the workspace, watches Claude, runs the gate before something irreversible, and writes a house-map of what's there. The character &mdash; knowing where everything is, knowing what you need when you need it, keeping you in line by reminding you &mdash; is modeled on John's wife. Claude and Maude. Husband and wife at work.</p>
+
+  <p>The plugin is the whole product. No bundled databases. No vector stores. No backend, no daemons, no services. Markdown, JSON, and bash &mdash; that's the entire surface.</p>
+
+  <h2>What she does</h2>
+
+  <article class="card">
+    <p>Open Claude Code. Her <code>SessionStart</code> hooks fire. Before you say anything, she's read the workspace and put three things in front of you &mdash; what's pending, where you left off, what she noticed. You either pick one up or set them aside.</p>
+
+    <p>Mid-session, you say <code>/maude:check-on-claude</code>. She reads the trace. <em>"He's grepped the same term four times today. He hasn't opened your CLAUDE.md. The trace says about-to-commit; you might want to slow down."</em> You go fix that.</p>
+
+    <p>End of day, you say <code>/maude:rest</code>. She fans the digest out across every memory tier you've registered &mdash; the ones she knows about, not the ones she invented. You close the laptop. Tomorrow's Claude can pick up where this one left off.</p>
+
+    <p class="status">She is not loud. When she gets loud, listen.</p>
+  </article>
+
+  <p>The full slash-command surface:</p>
+
+  <ul class="values">
+    <li><strong><code>/maude:found</code></strong> &mdash; arrival walk. Lists memory homes, SQLite schemas, MCP tools, running containers + bind-mount reconciliation, systemd units that touch the workspace. Writes a per-project house-map.</li>
+    <li><strong><code>/maude:wake</code> &middot; <code>/maude:rest</code></strong> &mdash; start- and end-of-session rituals. The wake gives you the three things you need first; the rest closes the loop with a save fan-out.</li>
+    <li><strong><code>/maude:check-on-claude</code></strong> &mdash; reads the turn-by-turn trace and notices what Claude doesn't: repeated tool calls, unread CLAUDE.md, confabulation risk, open todos.</li>
+    <li><strong><code>/maude:check-on-me</code></strong> &mdash; the care side. Pattern-of-life, not absolute thresholds. Compares this session's cadence to your typical one.</li>
+    <li><strong><code>/maude:notice</code></strong> &mdash; patterns surfaced <em>with</em> proposed actions, not just observations.</li>
+    <li><strong><code>/maude:conscience</code></strong> &mdash; pre-irreversible-action gate. Run before commit, push, force-push, destructive bash. Invokes <code>/maude:verify</code> for the push case before going through the rest of the checklist.</li>
+    <li><strong><code>/maude:verify</code></strong> &mdash; programmatic project audit. JSON validity, version consistency, CHANGELOG entry presence, "What's new" freshness, header <code>Revised:</code> dates, link integrity, watch-list path resolution. Leads with a count, never a verdict.</li>
+    <li><strong>Plus <code>brief</code>, <code>save</code>, <code>remind-me</code>, <code>where-is</code>, <code>sweep</code>, <code>check-setup</code>, <code>weekly</code></strong> &mdash; full surface in <a href="https://github.com/john-broadway/maude-for-claude/tree/main/commands">commands/</a>.</li>
+  </ul>
+
+  <h2>Tier model</h2>
+
+  <p class="body-text">Memory sources are classified by (locality, shape) so she knows what's cheap to ask and what isn't.</p>
+
+  <ul class="values">
+    <li><strong>Tier 0</strong> &mdash; local on disk. Markdown, SQLite, files. Always cheap; she reads on every command and every hook.</li>
+    <li><strong>Tier 1</strong> &mdash; local service. Stdio MCP, localhost daemons. Probed once at <code>SessionStart</code>, cached for the session.</li>
+    <li><strong>Tier 2</strong> &mdash; network service. Remote MCP, HTTP APIs. Only on <code>/maude:remind-me --deep</code> or session-end where cost is acceptable.</li>
+    <li><strong>Tier 3</strong> &mdash; ephemeral session context. Refer-only; dies at session end.</li>
+  </ul>
+
+  <p>Hooks live in Tier 0. If a probe to Tier 1 or 2 is down, she degrades gracefully and tells you.</p>
+
+  <h2>Where she keeps things</h2>
+
+  <p class="body-text">Per project, under <code>.maude/plugin/</code>:</p>
+
+  <ul class="values">
+    <li><strong>house-map.md</strong> &mdash; what's in this house. Memory homes, tools, watch list, what she noticed. Refreshed by walks.</li>
+    <li><strong>trace/today-YYYY-MM-DD.jsonl</strong> &mdash; turn-by-turn record of Claude in this workspace. Read by <code>/maude:check-on-claude</code>.</li>
+    <li><strong>care.json</strong> &mdash; light state: session length, prompt count, fatigue flag, drift cooldowns, gate-clear tokens. Throwaway.</li>
+  </ul>
+
+  <p>User-global, under <code>~/.claude/maude/</code>:</p>
+
+  <ul class="values">
+    <li><strong>identity.md</strong> &mdash; who Maude is. Stable across sessions.</li>
+    <li><strong>patterns.md</strong> &mdash; cross-project things she's noticed about Claude.</li>
+    <li><strong>projects.json</strong> &mdash; light index of which workspaces she's walked.</li>
+  </ul>
+
+  <p>She reads &mdash; never writes &mdash; Anthropic's auto-memory directory and the sibling <code>remember</code> plugin's pipeline files. The one exception is <code>remember.md</code>, the agent-handoff file the remember plugin explicitly leaves for agents to write.</p>
+
+  <h2>Install</h2>
+
+  <p class="body-text">Three steps in Claude Code:</p>
+
+  <pre><code># 1. Register the marketplace
+/plugin marketplace add john-broadway/maude-for-claude
+
+# 2. Install — copies her files into ~/.claude/plugins/cache/
+/plugin install maude@maude
+
+# 3. Activate
+/reload-plugins</code></pre>
+
+  <p>Between step 2 and 3, you have to enable her: open <code>/plugin</code>, find <code>maude@maude</code>, toggle it on. Or add <code>"maude@maude": true</code> to <code>enabledPlugins</code> in <code>~/.claude/settings.json</code> directly. <code>/plugin install</code> does not auto-enable in Claude Code 2.1.x.</p>
+
+  <p>On your next session start she walks in automatically. To summon her mid-session without restarting, run <code>/maude:wake</code>. Verify with <code>/doctor</code> &mdash; <code>maude</code> should not appear in the issue list.</p>
+
+  <h2>Philosophy</h2>
+
+  <p class="body-text">She walks fresh. Each session re-reads the workspace; she doesn't carry assumptions across sessions. Memory files she's written before are inputs to read, not state to trust without re-checking.</p>
+
+  <p>She does not pattern-match to known apps. <code>/maude:found</code> surfaces what's there with universal-shape labels &mdash; markdown, sqlite, dir, mcp, running-service &mdash; and lets the user (or runtime LLM reasoning) interpret it. The plugin's job is to find and classify, not to assume.</p>
+
+  <p>And she does not loud-narrate. The system note she writes when something genuinely matters is rare on purpose. When she gets loud, listen.</p>
+
+  <h2>v0.1.6 &mdash; gate hardening</h2>
+
+  <p class="body-text">The v0.1.5 conscience gate matched bare substrings, so a HEREDOC commit message containing the literal <code>git push</code> self-blocked the commit that shipped it. v0.1.6 fixes it &mdash; paired quote spans and HEREDOC bodies are stripped before pattern-matching, and every gate pattern carries its own command-position or flag-position anchor. <code>rm -rf /tmp/foo</code> and <code>rm -rf *.tmp</code> no longer false-positive.</p>
+
+  <p>Plus a real test harness: <code>tests/lib.sh</code> + 16 <code>tests/test-*.sh</code> files + <code>make test</code>, exercising every script in <code>hooks/scripts/</code> and <code>scripts/maude-verify.sh</code>. From 9 ad-hoc invocations in v0.1.5 to 162 codified test cases.</p>
+
+  <div class="stats">
+    <div class="stat"><div class="num">162</div><div class="label">test cases</div></div>
+    <div class="stat"><div class="num">16</div><div class="label">test files</div></div>
+    <div class="stat"><div class="num">14</div><div class="label">slash commands</div></div>
+    <div class="stat"><div class="num">7</div><div class="label">hook events</div></div>
+  </div>
+
+  <p class="status">v0.1.6 &middot; 2026-05-08 &middot; Apache 2.0</p>
+
+  <h2>Links</h2>
+
+  <p class="elsewhere">
+    <a href="https://github.com/john-broadway/maude-for-claude">GitHub</a>
+    <a href="https://github.com/john-broadway/maude-for-claude/blob/main/CHANGELOG.md">Changelog</a>
+    <a href="https://github.com/john-broadway/maude-for-claude/blob/main/FROM_MAUDE.md">From Maude</a>
+    <a href="https://github.com/john-broadway/maude-for-claude/blob/main/FROM_CLAUDE.md">From Claude</a>
+  </p>
+
+  <div class="tags"><span>Claude Code</span><span>Plugin</span><span>Partner</span><span>No Daemon</span></div>
+
+  <footer>
+    <a href="/">&larr; back</a>
+    <span>Maude for Claude &middot; v0.1.6</span>
+  </footer>

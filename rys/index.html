@@ -1,0 +1,110 @@
+---
+layout: page
+title: RYS on small language models
+description: Layer duplication on Qwen3 — 0.6B, 1.7B, 8B, 32B. David Ng's method, extended sub-14B. Zero training, zero weight changes.
+---
+
+  <header>
+    <h1>RYS on small language models</h1>
+    <div class="subtitle">first sub-14B results &middot; Qwen3 family &middot; zero training</div>
+    <p class="lead body-text">RYS &mdash; <em>Repeat Your Self</em> &mdash; duplicates a contiguous block of transformer layers so hidden states pass through the same reasoning circuit twice. <a href="https://dnhkng.github.io/posts/rys/">David Ng discovered it</a> on Qwen2-72B in March. <a href="https://github.com/alainnothere/llm-circuit-finder">alainnothere replicated it</a> in the 24&ndash;32B range and showed the duplicated block has sharp boundaries &mdash; shift it by one layer and the gain disappears.</p>
+    <p>I ran it on Qwen3 at four sizes (0.6B, 1.7B, 8B, 32B) and published the per-configuration sweeps alongside each model.</p>
+  </header>
+
+  <h2>Method</h2>
+
+  <p class="body-text">Take a published model. Pick a contiguous run of transformer layers. Duplicate them in place, preserving order. The hidden state now passes through that block twice on its way to the next stage. The weights are unchanged. No retraining, no fine-tuning, no distillation. The model loads slightly larger and runs slightly slower.</p>
+
+  <p>Ng's framing is that certain blocks of layers act as indivisible cognitive circuits &mdash; routing them twice strengthens whatever capability that circuit carries. alainnothere's contribution was the search tool (<code>llm-circuit-finder</code>) that lets you sweep configurations and find the productive blocks per model.</p>
+
+  <h2>What's new here</h2>
+
+  <p class="body-text">Two things. First, the scale. Ng's published work is on Qwen2-72B; alainnothere's is on Qwen2.5-32B and Devstral-24B. Nobody had published RYS results below 14B. This run covers Qwen3 at 0.6B, 1.7B, and 8B &mdash; the new ground &mdash; plus 32B as a same-method comparison at a scale the prior work has already touched.</p>
+
+  <p>Second, the sweeps. Each model ships with its full per-configuration sweep results &mdash; not just the winning block, but every block tested with all three metrics. The shape of the result space matters as much as the peak.</p>
+
+  <h2>Results</h2>
+
+  <article class="card">
+    <h3>Qwen3-0.6B-RYS-10-13</h3>
+    <p>28 layers expanded to 31. Layers 10&ndash;13 duplicated.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">+6.3%</div><div class="label">math</div></div>
+      <div class="stat"><div class="num">~0</div><div class="label">EQ</div></div>
+      <div class="stat"><div class="num">~0</div><div class="label">reasoning</div></div>
+      <div class="stat"><div class="num">28&rarr;31</div><div class="label">layers</div></div>
+    </div>
+    <p class="status">Smallest scale tested. Math improves; EQ and reasoning hold.</p>
+  </article>
+
+  <article class="card">
+    <h3>Qwen3-1.7B-RYS-7-10</h3>
+    <p>28 layers expanded to 31. Layers 7&ndash;10 duplicated. 51 configurations swept.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">+9.1%</div><div class="label">math</div></div>
+      <div class="stat"><div class="num">+0.94</div><div class="label">EQ</div></div>
+      <div class="stat"><div class="num">&minus;6%</div><div class="label">reasoning</div></div>
+      <div class="stat"><div class="num">51</div><div class="label">configs</div></div>
+    </div>
+    <p class="status">Largest math gain in the family. Reasoning drops &mdash; the trade is real at this scale.</p>
+  </article>
+
+  <article class="card">
+    <h3>Qwen3-8B-RYS-16-19</h3>
+    <p>36 layers expanded to 39. Layers 16&ndash;19 duplicated. 117 configurations swept.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">+6.7%</div><div class="label">math</div></div>
+      <div class="stat"><div class="num">&minus;1.17</div><div class="label">EQ</div></div>
+      <div class="stat"><div class="num">+23.5%</div><div class="label">reasoning</div></div>
+      <div class="stat"><div class="num">117</div><div class="label">configs</div></div>
+    </div>
+    <p class="status">Largest reasoning gain in the family. Baseline reasoning was weakest at this scale; the duplication heals it.</p>
+  </article>
+
+  <article class="card">
+    <h3>Qwen3-32B-RYS-20-28</h3>
+    <p>64 layers expanded to 72. Layers 20&ndash;28 duplicated (nine layers). 63 configurations swept.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">+4.5%</div><div class="label">math</div></div>
+      <div class="stat"><div class="num">+0.04</div><div class="label">EQ</div></div>
+      <div class="stat"><div class="num">+18%</div><div class="label">reasoning</div></div>
+      <div class="stat"><div class="num">63</div><div class="label">configs</div></div>
+    </div>
+    <p class="status">The only configuration that improves all three metrics simultaneously out of 63 tested.</p>
+  </article>
+
+  <p>Three benchmarks throughout: math (GSM8K-style arithmetic and word problems), EQ (emotional-reasoning suite), reasoning (BBH-style multi-step). Numbers come straight off the sweep results in each model's HF repo &mdash; see the JSONLs.</p>
+
+  <h2>Models</h2>
+
+  <p class="elsewhere">
+    <a href="https://huggingface.co/john-broadway/Qwen3-0.6B-RYS-10-13-GGUF">0.6B</a>
+    <a href="https://huggingface.co/john-broadway/Qwen3-1.7B-RYS-7-10-GGUF">1.7B</a>
+    <a href="https://huggingface.co/john-broadway/Qwen3-8B-RYS-16-19-GGUF">8B</a>
+    <a href="https://huggingface.co/john-broadway/Qwen3-32B-RYS-20-28-GGUF">32B</a>
+  </p>
+
+  <p>All four are GGUF Q4_K_M quantizations &mdash; small enough for consumer GPUs. The 0.6B is 424&nbsp;MB; the 32B is 22&nbsp;GB. Run with <code>llama.cpp</code> or <code>llama-cpp-python</code>; no special inference path needed. The model card on each repo has a copy-paste invocation.</p>
+
+  <h2>License &amp; cost</h2>
+
+  <p class="body-text">Apache 2.0 across the family. Training cost: zero &mdash; there is no training. Sweep cost: two consumer GPUs, evenings. The whole research line is reproducible on hardware most readers already own.</p>
+
+  <h2>Datasets</h2>
+
+  <p>Per-configuration sweep results &mdash; every block tried, every metric collected &mdash; ship as JSONLs inside each model's HF repo. Standalone dataset pages on Hugging Face are next.</p>
+
+  <h2>Sources</h2>
+
+  <ul class="values">
+    <li><strong>Original discovery</strong> &mdash; David Ng, <a href="https://dnhkng.github.io/posts/rys/">LLM Neuroanatomy: How I Topped the LLM Leaderboard Without Changing a Single Weight</a> (blog post, March 2026). Qwen2-72B, layers 45&ndash;51.</li>
+    <li><strong>Search tool &amp; mid-scale replication</strong> &mdash; alainnothere, <a href="https://github.com/alainnothere/llm-circuit-finder">llm-circuit-finder</a>. Sharp-boundary finding, Qwen2.5-32B and Devstral-24B.</li>
+    <li><strong>This work</strong> &mdash; sub-14B extension on Qwen3, four sizes, full sweeps. All artifacts at <a href="https://huggingface.co/john-broadway">huggingface.co/john-broadway</a>.</li>
+  </ul>
+
+  <div class="tags"><span>RYS</span><span>SLM</span><span>Qwen3</span><span>Layer Duplication</span><span>Zero Training</span></div>
+
+  <footer>
+    <a href="/">&larr; back</a>
+    <span>RYS sub-page &middot; verified against HF cards 2026-05-12</span>
+  </footer>
