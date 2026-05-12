@@ -7,7 +7,7 @@ description: Layer duplication on Qwen3 — 0.6B, 1.7B, 8B, 32B. David Ng's meth
   <header>
     <h1>RYS on small language models</h1>
     <div class="subtitle">Qwen3 family &middot; four scales &middot; zero training</div>
-    <p class="lead body-text">RYS &mdash; <em>Repeat Your Self</em> &mdash; duplicates a contiguous block of transformer layers so hidden states pass through the same reasoning circuit twice. <a href="https://dnhkng.github.io/posts/rys/">David Ng discovered it</a> on Qwen2-72B in March. The technique has since been replicated at multiple scales by independent researchers.</p>
+    <p class="lead body-text">RYS &mdash; <em>Repeat Your Self</em> &mdash; duplicates a contiguous block of transformer layers so hidden states pass through the same reasoning circuit twice. <a href="https://dnhkng.github.io/posts/rys/">David Ng discovered it</a> on Qwen2-72B in March.</p>
     <p>I ran it across Qwen3 at four sizes &mdash; 0.6B, 1.7B, 8B, 32B &mdash; using the same probe methodology at each, so the scaling shape of the result space is observable. Per-configuration sweep results ship alongside each model.</p>
   </header>
 
