@@ -1,0 +1,24 @@
+---
+layout: page
+title: Log
+description: Notes on what I'm building.
+---
+
+  <header>
+    <h1>Log</h1>
+    <div class="subtitle">notes &middot; writing</div>
+    <p class="lead body-text">Notes on what I'm building.</p>
+  </header>
+
+  {% for post in site.posts %}
+  <article class="card">
+    <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+    {% if post.description %}<p>{{ post.description }}</p>{% endif %}
+    <p class="status">{{ post.date | date: "%B %-d, %Y" }}</p>
+  </article>
+  {% endfor %}
+
+  <footer>
+    <a href="/">&larr; back</a>
+    <span>Log</span>
+  </footer>
