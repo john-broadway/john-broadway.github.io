@@ -1,12 +1,12 @@
 ---
 layout: page
 title: RYS on small language models
-description: Layer duplication on Qwen3 — 0.6B, 1.7B, 8B, 32B. David Ng's method, applied across four scales with full per-configuration sweeps. Zero training, zero weight changes.
+description: Layer duplication taken from Qwen3 (0.6B–32B) out across 10 architecture families. David Ng's method, train-free, with full per-configuration sweeps. Zero training, zero weight changes.
 ---
 
   <header>
     <h1>RYS on small language models</h1>
-    <div class="subtitle">Qwen3 family &middot; four scales &middot; zero training</div>
+    <div class="subtitle">Qwen3 headline &middot; 10-architecture sweep &middot; zero training</div>
     <p class="lead body-text">RYS &mdash; <em>Repeat Your Self</em> &mdash; duplicates a contiguous block of transformer layers so hidden states pass through the same reasoning circuit twice. <a href="https://dnhkng.github.io/posts/rys/">David Ng discovered it</a> on Qwen2-72B in March.</p>
     <p>I ran it across Qwen3 at four sizes &mdash; 0.6B, 1.7B, 8B, 32B &mdash; using the same probe methodology at each, so the scaling shape of the result space is observable. Per-configuration sweep results ship alongside each model.</p>
   </header>
@@ -22,6 +22,8 @@ description: Layer duplication on Qwen3 — 0.6B, 1.7B, 8B, 32B. David Ng's meth
   <p class="body-text">Two things. First, breadth. Prior published runs covered specific single models. This run applies the same probe methodology across the Qwen3 family at four scales (0.6B, 1.7B, 8B, 32B), so the scaling shape of the result space &mdash; how the productive block, the metrics that move, and the trade-offs change as parameter count moves through three orders of magnitude &mdash; is directly comparable across sizes.</p>
 
   <p>Second, the sweeps. Each model ships with its full per-configuration sweep results &mdash; not just the winning block, but every block tested with all three metrics. The shape of the result space matters as much as the peak.</p>
+
+  <p>Since this run, the same probe methodology has gone wider still &mdash; across 10 architecture families (Qwen2.5, Llama, Mistral, Gemma, Yi, Granite, SmolLM, TinyLlama) from 135M to 32B, 22 model repos gathered in two Sovereign Collections. The Qwen3 study below stays the headline: cleanest scaling shape, strongest single result. <a href="https://huggingface.co/john-broadway">Full collection on Hugging Face.</a></p>
 
   <h2>Results</h2>
 
@@ -88,7 +90,7 @@ description: Layer duplication on Qwen3 — 0.6B, 1.7B, 8B, 32B. David Ng's meth
 
   <h2>License &amp; cost</h2>
 
-  <p class="body-text">Apache 2.0 across the family. Training cost: zero &mdash; there is no training. The artifacts are GGUF Q4_K_M; the 0.6B and 1.7B run on integrated GPUs, the 8B fits on most consumer cards, the 32B wants 24&nbsp;GB of VRAM.</p>
+  <p class="body-text">The Qwen3 models here are Apache 2.0; across the wider sweep, each model inherits its base model's license. Training cost: zero &mdash; there is no training. The artifacts are GGUF Q4_K_M; the 0.6B and 1.7B run on integrated GPUs, the 8B fits on most consumer cards, the 32B wants 24&nbsp;GB of VRAM.</p>
 
   <h2>Datasets</h2>
 
@@ -99,7 +101,7 @@ description: Layer duplication on Qwen3 — 0.6B, 1.7B, 8B, 32B. David Ng's meth
   <ul class="values">
     <li><strong>Original discovery</strong> &mdash; David Ng, <a href="https://dnhkng.github.io/posts/rys/">LLM Neuroanatomy: How I Topped the LLM Leaderboard Without Changing a Single Weight</a> (blog post, March 2026). Qwen2-72B, layers 45&ndash;51.</li>
     <li><strong>Search tool &amp; mid-scale replication</strong> &mdash; alainnothere, <a href="https://github.com/alainnothere/llm-circuit-finder">llm-circuit-finder</a>. Sharp-boundary finding, Qwen2.5-32B and Devstral-24B.</li>
-    <li><strong>This work</strong> &mdash; same method applied across Qwen3 at four sizes (0.6B, 1.7B, 8B, 32B), full per-configuration sweeps. All artifacts at <a href="https://huggingface.co/john-broadway">huggingface.co/john-broadway</a>.</li>
+    <li><strong>This work</strong> &mdash; same method applied across Qwen3 at four sizes (0.6B, 1.7B, 8B, 32B), full per-configuration sweeps; extended in a follow-on sweep to 10 architecture families, 135M&ndash;32B. All artifacts at <a href="https://huggingface.co/john-broadway">huggingface.co/john-broadway</a>.</li>
   </ul>
 
   <div class="tags"><span>RYS</span><span>SLM</span><span>Qwen3</span><span>Layer Duplication</span><span>Zero Training</span></div>

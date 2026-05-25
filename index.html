@@ -23,16 +23,16 @@ description: Independent AI researcher and infrastructure architect. Sovereign A
   <h2>Research</h2>
 
   <article class="card">
-    <h3><a href="/rys/">RYS on small language models &mdash; Qwen3 family, four scales</a></h3>
-    <p>RYS &mdash; <em>Repeat Your Self</em>, David Ng's method &mdash; duplicates a block of transformer layers so hidden states pass through the same reasoning circuit twice. I ran it on four Qwen3 sizes (0.6B, 1.7B, 8B, 32B) using alainnothere's <code>llm-circuit-finder</code> for the probe sweep. Zero training, zero weight changes &mdash; architectural surgery.</p>
+    <h3><a href="/rys/">RYS on small language models &mdash; Qwen3 headline, 10-architecture sweep</a></h3>
+    <p>RYS &mdash; <em>Repeat Your Self</em>, David Ng's method &mdash; duplicates a block of transformer layers so hidden states pass through the same reasoning circuit twice. I ran it on four Qwen3 sizes (0.6B, 1.7B, 8B, 32B) using alainnothere's <code>llm-circuit-finder</code> for the probe sweep &mdash; then took the same method across 10 architecture families, 135M to 32B. Zero training, zero weight changes &mdash; architectural surgery.</p>
     <div class="stats">
-      <div class="stat"><div class="num">0.6B</div><div class="label">smallest scale</div></div>
       <div class="stat"><div class="num">+6.3%</div><div class="label">math at 0.6B</div></div>
-      <div class="stat"><div class="num">4</div><div class="label">model sizes</div></div>
+      <div class="stat"><div class="num">10</div><div class="label">architectures</div></div>
+      <div class="stat"><div class="num">22</div><div class="label">model repos</div></div>
       <div class="stat"><div class="num">$0</div><div class="label">training cost</div></div>
     </div>
-    <p class="status">Four GGUF models and per-configuration sweep results on <a href="https://huggingface.co/john-broadway">Hugging Face</a> &mdash; 0.6B, 1.7B, 8B, 32B. Apache 2.0.</p>
-    <div class="tags"><span>RYS</span><span>SLM</span><span>Qwen3</span><span>Bare Metal</span></div>
+    <p class="status">22 model repos and full per-configuration sweeps on <a href="https://huggingface.co/john-broadway">Hugging Face</a> &mdash; 135M to 32B, two Sovereign Collections. Per-model licenses.</p>
+    <div class="tags"><span>RYS</span><span>SLM</span><span>Cross-Architecture</span><span>Bare Metal</span></div>
   </article>
 
   <h2>Projects</h2>
@@ -41,7 +41,7 @@ description: Independent AI researcher and infrastructure architect. Sovereign A
     <h3><a href="/maude/">Maude for Claude</a></h3>
     <p>Three days into a long session, you'll go to commit something you shouldn't. She catches it. He writes the code; she notices.</p>
     <p>No daemon, no database, no backend. Markdown, JSON, and bash &mdash; that's the whole surface. Each session, fresh.</p>
-    <p class="status">Beta v0.1.6 (2026-05-08) &mdash; gate hardening + 162-case test suite. Apache 2.0.</p>
+    <p class="status">Beta v0.1.7 (2026-05-24) &mdash; save/rest/recall drive off the house-map. Apache 2.0.</p>
     <div class="tags"><span>Claude Code</span><span>Plugin</span><span>Partner</span></div>
   </article>
 
