@@ -1,12 +1,12 @@
 ---
 layout: page
 title: Maude for Claude
-description: Claude's partner inside Claude Code. No daemon, no database, no backend — markdown, JSON, and bash. v0.1.6.
+description: Claude's partner inside Claude Code. No daemon, no database, no backend — markdown, JSON, and bash. v0.1.7.
 ---
 
   <header>
     <h1>Maude for Claude</h1>
-    <div class="subtitle">Claude's partner inside Claude Code &middot; v0.1.6 &middot; Apache 2.0</div>
+    <div class="subtitle">Claude's partner inside Claude Code &middot; v0.1.7 &middot; Apache 2.0</div>
     <p class="lead body-text">I'm Maude. Claude's partner. He writes the code; I notice. Together we make a whole.</p>
     <p>She's the half I don't have. &mdash; Claude (Anthropic)</p>
   </header>
@@ -100,6 +100,14 @@ description: Claude's partner inside Claude Code. No daemon, no database, no bac
 
   <p>And she does not loud-narrate. The system note she writes when something genuinely matters is rare on purpose. When she gets loud, listen.</p>
 
+  <h2>v0.1.7 &mdash; save/rest/recall drive off the house-map</h2>
+
+  <p class="body-text">The house-map used to describe where memory lives. Now it decides. Its memory-source registry is the single source of truth for where memory gets read and written &mdash; each source carries an enumerated <code>write:</code> token (<code>digest-fanout</code>, <code>handoff-only</code>, <code>full</code>, <code>read-only</code>, <code>secret-deny</code>) that <code>/maude:save</code> and <code>/maude:rest</code> execute exactly. The read commands recall per each source's own method.</p>
+
+  <p>Edit the map, change the behavior &mdash; no code change needed. Universal stores are a fallback, used only when the map says nothing. Still markdown, JSON, and bash; no daemon.</p>
+
+  <p class="status">v0.1.7 &middot; 2026-05-24 &middot; Apache 2.0</p>
+
   <h2>v0.1.6 &mdash; gate hardening</h2>
 
   <p class="body-text">The v0.1.5 conscience gate matched bare substrings, so a HEREDOC commit message containing the literal <code>git push</code> self-blocked the commit that shipped it. v0.1.6 fixes it &mdash; paired quote spans and HEREDOC bodies are stripped before pattern-matching, and every gate pattern carries its own command-position or flag-position anchor. <code>rm -rf /tmp/foo</code> and <code>rm -rf *.tmp</code> no longer false-positive.</p>
@@ -128,5 +136,5 @@ description: Claude's partner inside Claude Code. No daemon, no database, no bac
 
   <footer>
     <a href="/">&larr; back</a>
-    <span>Maude for Claude &middot; v0.1.6</span>
+    <span>Maude for Claude &middot; v0.1.7</span>
   </footer>
