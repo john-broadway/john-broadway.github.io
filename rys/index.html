@@ -77,6 +77,8 @@ description: Layer duplication taken from Qwen3 (0.6B–32B) out across 10 archi
 
   <p>Three benchmarks measured per configuration: math, EQ (emotional reasoning), and reasoning (multi-step). Numbers come straight off the sweep results in each model's HF repo &mdash; see the JSONLs for the exact suites and raw scores.</p>
 
+  <p class="status">A caveat earned since: these scores come from thin search probes (16 math / 16 EQ / 17 reasoning, coarsely quantized). They are a good heuristic for <em>finding</em> productive duplication blocks, but a poor capability benchmark &mdash; and at small scale (&le;~1.5B) their failure modes can manufacture apparent gains that don't reproduce on a full benchmark. Read the small-model deltas as search signal, not capability claims; the evidence is most trustworthy at the largest scales, where RYS was first demonstrated.</p>
+
   <h2>Models</h2>
 
   <p class="elsewhere">
