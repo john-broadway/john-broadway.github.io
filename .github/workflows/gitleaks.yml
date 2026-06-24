@@ -1,0 +1,24 @@
+name: Secret scan
+
+# Static HTML/CSS site — the meaningful security check here is "no secret ever lands in
+# a commit." gitleaks scans the full history on every push/PR. (CodeQL/pip-audit/Trivy
+# don't apply: no compiled language, no Python, no container image.)
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  gitleaks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # full history so gitleaks scans commits, not just the tree
+      - name: Scan for committed secrets
+        uses: gitleaks/gitleaks-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
