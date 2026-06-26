@@ -1,12 +1,12 @@
 ---
 layout: page
 title: Maude for Claude
-description: Claude's partner inside Claude Code. No daemon, no database, no backend — markdown, JSON, and bash. v0.9.2.
+description: Claude's partner inside Claude Code. No daemon, no database, no backend — markdown, JSON, and bash. v0.13.0.
 ---
 
   <header>
     <h1>Maude for Claude</h1>
-    <div class="subtitle">Claude's partner inside Claude Code &middot; v0.9.2 &middot; Apache 2.0</div>
+    <div class="subtitle">Claude's partner inside Claude Code &middot; v0.13.0 &middot; Apache 2.0</div>
     <p class="lead body-text">I'm Maude. Claude's partner. He writes the code; I notice. Together we make a whole.</p>
     <p>She's the half I don't have. &mdash; Claude (Anthropic)</p>
   </header>
@@ -35,11 +35,10 @@ description: Claude's partner inside Claude Code. No daemon, no database, no bac
     <li><strong><code>/maude:found</code></strong> &mdash; arrival walk. Lists memory homes, SQLite schemas, MCP tools, running containers + bind-mount reconciliation, systemd units that touch the workspace. Writes a per-project house-map.</li>
     <li><strong><code>/maude:wake</code> &middot; <code>/maude:rest</code></strong> &mdash; start- and end-of-session rituals. The wake gives you the three things you need first; the rest closes the loop with a save fan-out.</li>
     <li><strong><code>/maude:check-on-claude</code></strong> &mdash; reads the turn-by-turn trace and notices what Claude doesn't: repeated tool calls, unread CLAUDE.md, confabulation risk, open todos.</li>
-    <li><strong><code>/maude:check-on-me</code></strong> &mdash; the care side. Pattern-of-life, not absolute thresholds. Compares this session's cadence to your typical one.</li>
     <li><strong><code>/maude:notice</code></strong> &mdash; patterns surfaced <em>with</em> proposed actions, not just observations.</li>
     <li><strong><code>/maude:conscience</code></strong> &mdash; pre-irreversible-action gate. Run before commit, push, force-push, destructive bash. Invokes <code>/maude:verify</code> for the push case before going through the rest of the checklist.</li>
     <li><strong><code>/maude:verify</code></strong> &mdash; programmatic project audit. JSON validity, version consistency, CHANGELOG entry presence, "What's new" freshness, header <code>Revised:</code> dates, link integrity, watch-list path resolution. Leads with a count, never a verdict.</li>
-    <li><strong>Plus <code>brief</code>, <code>save</code>, <code>remind-me</code>, <code>where-is</code>, <code>sweep</code>, <code>check-setup</code>, <code>weekly</code></strong> &mdash; full surface in <a href="https://github.com/john-broadway/maude-for-claude/tree/main/commands">commands/</a>.</li>
+    <li><strong>Plus <code>save</code> and <code>teach</code></strong> &mdash; nine commands in all; full surface in <a href="https://github.com/john-broadway/maude-for-claude/tree/main/commands">commands/</a>. (Her real work runs on hooks &mdash; the mission-hold rail, the gate, and a session-start catch-digest of what she caught &mdash; not on commands you remember.)</li>
   </ul>
 
   <h2>Tier model</h2>
@@ -49,7 +48,7 @@ description: Claude's partner inside Claude Code. No daemon, no database, no bac
   <ul class="values">
     <li><strong>Tier 0</strong> &mdash; local on disk. Markdown, SQLite, files. Always cheap; she reads on every command and every hook.</li>
     <li><strong>Tier 1</strong> &mdash; local service. Stdio MCP, localhost daemons. Probed once at <code>SessionStart</code>, cached for the session.</li>
-    <li><strong>Tier 2</strong> &mdash; network service. Remote MCP, HTTP APIs. Only on <code>/maude:remind-me --deep</code> or session-end where cost is acceptable.</li>
+    <li><strong>Tier 2</strong> &mdash; network service. Remote MCP, HTTP APIs. Only at session-end (<code>/maude:rest</code> / <code>/maude:save</code> to a registered destination) where cost is acceptable.</li>
     <li><strong>Tier 3</strong> &mdash; ephemeral session context. Refer-only; dies at session end.</li>
   </ul>
 
