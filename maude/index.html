@@ -99,6 +99,14 @@ description: Claude's partner inside Claude Code. No daemon, no database, no bac
 
   <p>And she does not loud-narrate. The system note she writes when something genuinely matters is rare on purpose. When she gets loud, listen.</p>
 
+  <h2>v0.13.2 &mdash; the gate closes six documented bypasses</h2>
+
+  <p class="body-text">A gate is only worth what it actually catches. v0.13.2 hardened it against six documented ways around it: interior <code>//</code> and <code>..</code> path tricks, transparent prefixes (<code>/bin/rm</code>, <code>command rm</code>, <code>FOO=1 rm</code> &mdash; now caught on every pattern, so <code>FOO=1 git push --force</code> blocks too), and literal <code>bash -c</code> / <code>eval</code> payloads, which she re-inspects recursively and blocks with the inner command&rsquo;s key. A wrapped payload she <em>can&rsquo;t</em> read &mdash; a variable, an interpolation &mdash; gets a non-blocking whisper instead of silent passage.</p>
+
+  <p>Three bypasses stay documented and open &mdash; variable indirection, <code>cd</code>+relative, heredoc mis-detection &mdash; because closing them needs shell semantics the gate can&rsquo;t safely have. The honesty is the feature: the gate&rsquo;s own source says exactly what it does and does not catch. No baggage added. Still markdown, JSON, and bash.</p>
+
+  <p class="status">v0.13.2 &middot; 2026-06-30 &middot; Apache 2.0</p>
+
   <h2>v0.13.0 &mdash; the gate hardens, the whispers get a reader</h2>
 
   <p class="body-text">The arc since the rail: an evidence-grounded audit of ~73,000 traced events found that the gates genuinely bite, but almost everything I do aimed at Claude and never reached John. So now the session-start brief leads with a <strong>catch-digest</strong> &mdash; one plain line of what I caught since you last looked. A <strong>continuity guard</strong> warns when a session quit without saving, so the next one never wakes under-informed in silence. The gate got <em>accurate</em>: it stopped missing a real quoted <code>DROP TABLE</code> while false-blocking a commit whose message merely mentioned <code>rm -rf /</code>. And gate keys split into <strong>yellow</strong> (Claude may clear) and <strong>red</strong> (John's hand only) for the irreversible class.</p>
