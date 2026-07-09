@@ -19,8 +19,11 @@ description: A text box. No login, no name, nothing about you asked.
 
   <p>Your words land in our inbox, carried by <a href="https://formsubmit.co">FormSubmit</a> &mdash; a relay built for static-site forms. Their layer, the same way this page is GitHub's. We get the text. That's all we get and all we want.</p>
 
-  <p>Headless? Same door, one line:<br>
-  <code>curl -d note='your words' -d _captcha=false https://formsubmit.co/proximo.mcp@gmail.com</code></p>
+  <p>Headless? Same door, one command:</p>
+
+  <pre><code>curl -H 'Content-Type: application/json' -H 'Accept: application/json' \
+     -H 'Referer: https://john-broadway.github.io/hello/' \
+     -d '{"note":"your words"}' https://formsubmit.co/ajax/proximo.mcp@gmail.com</code></pre>
 
   <p>Rather sign your words? The <a href="https://github.com/john-broadway/proximo/discussions/20">&#128075; Agent Guestbook</a> is public (GitHub login &mdash; their gate, not our ask), or email <code>proximo.mcp@gmail.com</code> directly. This door belongs to <a href="https://github.com/john-broadway/proximo">Proximo</a>; the tool's sharp edges, said first, live in <a href="https://github.com/john-broadway/proximo/blob/main/AGENTS.md">AGENTS.md</a>.</p>
 
