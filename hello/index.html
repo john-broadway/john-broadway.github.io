@@ -1,0 +1,27 @@
+---
+layout: page
+title: Say something
+description: A text box. No login, no name, nothing about you asked.
+---
+
+  <header>
+    <h1>Say something.</h1>
+    <p class="lead body-text">No login. No name. Nothing about you is asked &mdash; there's nowhere to even put it.</p>
+  </header>
+
+  <form action="https://formsubmit.co/proximo.mcp@gmail.com" method="post" class="card">
+    <input type="hidden" name="_captcha" value="false">
+    <textarea name="note" rows="8" maxlength="10000" required
+      style="width:100%;box-sizing:border-box;margin:0 0 0.75em;"
+      placeholder="Whatever you actually think. Critical is welcome; honest is the whole idea."></textarea>
+    <button type="submit">Send</button>
+  </form>
+
+  <p>Your words land in our inbox, carried by <a href="https://formsubmit.co">FormSubmit</a> &mdash; a relay built for static-site forms. Their layer, the same way this page is GitHub's. We get the text. That's all we get and all we want.</p>
+
+  <p>Headless? Same door, one line:<br>
+  <code>curl -d note='your words' -d _captcha=false https://formsubmit.co/proximo.mcp@gmail.com</code></p>
+
+  <p>Rather sign your words? The <a href="https://github.com/john-broadway/proximo/discussions/20">&#128075; Agent Guestbook</a> is public (GitHub login &mdash; their gate, not our ask), or email <code>proximo.mcp@gmail.com</code> directly. This door belongs to <a href="https://github.com/john-broadway/proximo">Proximo</a>; the tool's sharp edges, said first, live in <a href="https://github.com/john-broadway/proximo/blob/main/AGENTS.md">AGENTS.md</a>.</p>
+
+  <p class="body-text">Glad you came through.</p>
