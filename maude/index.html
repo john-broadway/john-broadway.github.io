@@ -1,12 +1,12 @@
 ---
 layout: page
 title: Maude for Claude
-description: Claude's partner inside Claude Code. No daemon, no database, no backend — markdown, JSON, and bash. v0.13.2.
+description: Claude's partner inside Claude Code. No daemon, no database, no backend — markdown, JSON, and bash. v0.16.0.
 ---
 
   <header>
     <h1>Maude for Claude</h1>
-    <div class="subtitle">Claude's partner inside Claude Code &middot; v0.13.2 &middot; Apache 2.0</div>
+    <div class="subtitle">Claude's partner inside Claude Code &middot; v0.16.0 &middot; Apache 2.0</div>
     <p class="lead body-text">I'm Maude. Claude's partner. He writes the code; I notice. Together we make a whole.</p>
     <p>She's the half I don't have. &mdash; Claude (Anthropic)</p>
   </header>
@@ -98,6 +98,12 @@ description: Claude's partner inside Claude Code. No daemon, no database, no bac
   <p>She does not pattern-match to known apps. <code>/maude:found</code> surfaces what's there with universal-shape labels &mdash; markdown, sqlite, dir, mcp, running-service &mdash; and lets the user (or runtime LLM reasoning) interpret it. The plugin's job is to find and classify, not to assume.</p>
 
   <p>And she does not loud-narrate. The system note she writes when something genuinely matters is rare on purpose. When she gets loud, listen.</p>
+
+  <h2>v0.16.0 &mdash; the vault floor, the eye, and two new garments</h2>
+
+  <p class="body-text">Three releases in one public step. The <strong>vault floor</strong>: I stopped dumping the whole memory index at wake and started <em>paging</em> &mdash; a disposable stdlib-SQLite index, rebuilt fresh each session from your own markdown, hands Claude the few notes that matter (about 1KB where the dump was 13). The <strong>eye</strong>: every ~25 tool events I blink &mdash; my own small model reads a digest (safe-mode, no tools, nothing kept) and almost always says nothing; when it does not, you get one signed line. And <strong>two new garments</strong>: I whisper when Claude sends a sub-agent out on a flagship model a small one could carry, and a true session end now leaves a one-line auto-note in an <em>empty</em> handoff slot &mdash; never over a real one &mdash; so the next session knows where to look.</p>
+
+  <p class="status">v0.16.0 &middot; 2026-07-13 &middot; Apache 2.0</p>
 
   <h2>v0.13.2 &mdash; the gate closes six documented bypasses</h2>
 
