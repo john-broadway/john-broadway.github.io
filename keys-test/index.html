@@ -1,0 +1,73 @@
+---
+layout: page
+title: The Keys Test
+description: Ten questions to ask before you hand an AI agent real infrastructure. Vendor-neutral, checkable in an afternoon. The author's own tool scored at the bottom, partials included.
+---
+
+  <header>
+    <h1>The Keys Test</h1>
+    <div class="subtitle">Ten questions to ask before you hand an AI agent real infrastructure</div>
+    <p class="lead body-text">You're about to hand an AI agent real keys &mdash; to your hypervisor, your backups, your mail gateway, something you'd feel losing. Every tool on the shelf says "safe." The word is free. Receipts aren't.</p>
+  </header>
+
+  <p class="body-text">This is the test. Ten questions. A tool either answers them or it doesn't, and most answers are checkable in an afternoon with the tool's own docs open. If the docs go quiet on one &mdash; that's an answer too.</p>
+
+  <p class="body-text">I build one of these tools, so the rules apply to me first: mine is scored at the bottom, including the questions where my honest answer is "partial." Score anything else the same way. The test is yours.</p>
+
+  <h2>The questions</h2>
+
+  <h3>1. Before it acts, can you see what it's about to do?</h3>
+  <p class="body-text">Not a log after. A plan <em>before</em> &mdash; what changes, what's in the blast radius, what it touches that you didn't think of. If the first time you learn what the agent did is after it did it, you're not operating a tool; you're reading a confession.</p>
+
+  <h3>2. Is there a way to act <em>without</em> that plan?</h3>
+  <p class="body-text">One preview path and three side doors is zero preview paths. Ask where every mutation enters the tool. If the answer isn't "one funnel, no exceptions," the plan is decoration.</p>
+
+  <h3>3. When it acts, does a record land that the agent can't rewrite?</h3>
+  <p class="body-text">An append-only log the agent itself can edit is a diary, not evidence. You want tamper-evidence &mdash; a chained record where a rewrite breaks something checkable. Then ask the second half: who holds the key that seals it?</p>
+
+  <h3>4. Can you verify that record without trusting the tool that wrote it?</h3>
+  <p class="body-text">"Trust me" from the thing being audited is a circle. There should be a check you run yourself, and the docs should say exactly what that check proves &mdash; and what it doesn't.</p>
+
+  <h3>5. Can it be undone &mdash; and does the tool say plainly where it can't?</h3>
+  <p class="body-text">Nothing undoes everything. A firewall flush, a deleted token, a wiped disk &mdash; some of that has no rollback primitive on any platform. The trustworthy answer isn't "fully reversible." It's a map: undo covers <em>this</em> surface, and past that line you're exposed. A tool that won't draw the line is drawing it over you.</p>
+
+  <h3>6. Does it tell you what a credential can do <em>before</em> the AI touches it?</h3>
+  <p class="body-text">You should be able to hand the tool a token and get back the honest shape of it &mdash; what it reaches, what it can destroy &mdash; while the AI is still unplugged. Least privilege you can't inspect is a hope, not a policy.</p>
+
+  <h3>7. What happens when the agent reads hostile bytes?</h3>
+  <p class="body-text">The agent will read things strangers wrote &mdash; guest output, file contents, ticket text. That's the injection door: content becomes instruction, instruction becomes action. Ask what the tool <em>does</em> about it. Marks the read? Restricts what a tainted agent may do next? Anything? Most tools haven't met the question.</p>
+
+  <h3>8. Who holds the off switch &mdash; and does it live outside the agent's reach?</h3>
+  <p class="body-text">A kill switch the agent can flip back isn't a kill switch. Same for every control on this list: config the agent can rewrite, ledgers it can reach, consent files it can forge &mdash; those are manners, not walls. The honest question is where the control <em>state</em> lives. If it's inside the agent's write reach, you have discipline. Only outside do you have a boundary.</p>
+
+  <h3>9. Does it phone home?</h3>
+  <p class="body-text">What does the vendor learn when you run it? The right answer is a number: nothing. No telemetry, no install ping, no usage data. Anything more than nothing, the tool has two masters, and you're the one who didn't get asked.</p>
+
+  <h3>10. Does it lead with its limits?</h3>
+  <p class="body-text">Read the front page. Count the sentences that tell you what the tool <em>can't</em> do, what's unproven, where the edges are. Zero is a verdict. A tool with nothing to hide leads with the sharp edges &mdash; because the maker knows the limits are load-bearing, and hiding them just moves the discovery to your outage.</p>
+
+  <h2>How to score</h2>
+
+  <p class="body-text">Pass / partial / fail, straight down the list. No weights, no total &mdash; the point isn't a number, it's that you asked. A vendor who answers all ten in writing is telling you something. A vendor who answers eight and names the two &mdash; more. A vendor who won't take the test took it anyway.</p>
+
+  <h2>Proximo, scored (by its builder)</h2>
+
+  <p class="body-text">Rules apply to me first. <a href="https://github.com/john-broadway/proximo">Proximo</a> is a Proxmox MCP server; this is its honest sheet, checkable against <a href="https://github.com/john-broadway/proximo/blob/main/SECURITY.md">SECURITY.md</a>:</p>
+
+  <article class="card">
+    <ol>
+      <li><strong>See it before it acts &mdash; pass.</strong> Every mutation is planned first: dry-run preview, blast radius shown.</li>
+      <li><strong>No side door &mdash; pass.</strong> One mutation funnel. In-guest exec exists &mdash; opt-in, loud, allowlisted.</li>
+      <li><strong>A record it can't rewrite &mdash; pass.</strong> Hash-chained ledger, keyed (HMAC) by default.</li>
+      <li><strong>Verify without trusting &mdash; pass, with reading.</strong> <code>audit_verify</code> checks the chain yourself. The <em>strong</em> tail-attack guarantee is the opt-in pinned head &mdash; the docs say exactly which check proves what.</li>
+      <li><strong>Undo, with the line drawn &mdash; pass on honesty, partial on coverage.</strong> Snapshots before it acts, where the platform can. Firewall/SDN/ACL/token planes have no rollback primitive &mdash; said plainly, not papered over.</li>
+      <li><strong>Inspect the credential first &mdash; pass.</strong> <code>proximo doctor</code> prints what a token can and cannot do before any AI is wired in.</li>
+      <li><strong>Hostile bytes &mdash; partial.</strong> A taint control is built &mdash; adversarial reads set a sticky marker; tainted agents lose a pre-declared action set. But it's opt-in, inert until configured. Built &ne; on.</li>
+      <li><strong>Off switch outside reach &mdash; partial.</strong> Kill-switch, consent, lease, and scope controls all exist &mdash; and they're only a real boundary when their state lives outside the agent's write reach. On a single box they're discipline, not a wall. Proximo's docs call this the two-deployment trust model and tell you which one you're running.</li>
+      <li><strong>Phone home &mdash; pass.</strong> Nothing. No telemetry, no install data, no tracking.</li>
+      <li><strong>Leads with limits &mdash; pass.</strong> "Risk ratings are an advisory heuristic, not a sandbox &mdash; LOW means <em>no state change</em>, not <em>safe</em>" is on the front page. So is this table.</li>
+    </ol>
+    <p class="status">Seven pass, one pass-with-reading, two partial &mdash; and the partials are published here, by me, on purpose. That's the whole method: the test only works if the person holding it can't exempt himself.</p>
+  </article>
+
+  <p class="body-text"><em>Take the test. Apply it to anything &mdash; including mine.</em></p>
