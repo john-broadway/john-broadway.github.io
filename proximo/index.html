@@ -154,12 +154,13 @@
     animation:breathe 7.5s ease-in-out infinite;
   }
   @keyframes breathe{0%,100%{opacity:.82}50%{opacity:1}}
-  .hero .wrap{position:relative; z-index:1}
+  .hero .wrap{text-align:center; position:relative; z-index:1}
 
-  .mark{color:var(--gold); width:min(430px,74vw); height:auto; display:block; margin-bottom:2.4rem}
-  .mark svg{width:100%; height:auto; display:block;
+  .mark{color:var(--gold); width:min(430px,74vw); height:auto; display:block; margin:0 auto 2.4rem}
+  .mark svg{width:100%; height:auto; display:block; fill:url(#wm-dark);
+    filter:drop-shadow(0 0 26px rgba(235,170,70,.30)) drop-shadow(0 8px 16px rgba(0,0,0,.85));
     filter:drop-shadow(0 3px 10px rgba(0,0,0,.4));}
-  @media (prefers-color-scheme:light){ .mark svg{filter:none} }
+  @media (prefers-color-scheme:light){ .mark svg{fill:url(#wm-light); filter:drop-shadow(0 7px 13px rgba(80,52,14,.38))} }
 
   .kicker{
     font-family:"Cinzel",serif; font-weight:600; font-size:.72rem; letter-spacing:.4em;
@@ -168,17 +169,17 @@
 
   .say{
     font-size:clamp(1.9rem,3.4vw + 1rem,3.5rem);
-    margin:0 0 1.5rem; max-width:20ch;
+    margin:0 auto 1.5rem; max-width:30ch;
   }
-  .say .cut{display:block}
+  
   .say em{font-style:normal}
   .lede{
     font-size:clamp(1.12rem,.5vw + 1rem,1.32rem); color:var(--bone);
-    max-width:56ch; margin:0 0 2.4rem;
+    max-width:56ch; margin:0 auto 2.4rem;
   }
   .lede b{color:var(--gold); font-weight:600}
 
-  .doors{display:flex; flex-wrap:wrap; gap:14px; align-items:center}
+  .doors{display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:center}
   .btn{
     font-family:"Cinzel",serif; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
     font-size:.82rem; text-decoration:none; padding:.85em 1.5em; border-radius:2px;
@@ -197,7 +198,7 @@
 
   /* ================= SECTIONS ================= */
   section{position:relative; padding:clamp(72px,11vh,132px) 0}
-  .head{font-size:clamp(1.7rem,2.4vw + 1rem,2.7rem); margin:.2rem 0 1.2rem; max-width:18ch}
+  .head{font-size:clamp(1.7rem,2.4vw + 1rem,2.7rem); margin:.2rem 0 1.2rem; max-width:32ch}
   .sub{color:var(--ash); max-width:58ch; margin:0 0 3rem; font-size:1.12rem}
   .sub b{color:var(--bone); font-weight:600}
 
@@ -289,14 +290,11 @@
   <!-- ========== HERO : THE ARMING ========== -->
   <header class="hero">
     <div class="wrap">
-      <span class="mark" aria-label="Proximo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 220 5431 812" fill="currentColor" role="img" aria-label="Proximo"><g transform="matrix(1 0 0 -1 0 976)"><path transform="translate(0,0)" d="M189 700H321Q385 700 431.0 677.0Q477 654 502.0 610.5Q527 567 527 507Q527 461 509.0 424.5Q491 388 461.0 363.0Q431 338 393.0 325.5Q355 313 314.5 316.0Q274 319 236 339V349Q236 349 253.0 346.5Q270 344 296.5 345.5Q323 347 352.5 356.5Q382 366 407.5 390.0Q433 414 446 457Q449 468 451.0 484.5Q453 501 452 517Q451 586 416.0 628.0Q381 670 317 670H199Q199 670 196.5 677.5Q194 685 191.5 692.5Q189 700 189 700ZM202 700V0H137V700ZM140 73V0H60V10Q60 10 66.5 10.0Q73 10 73 10Q99 10 117.5 28.5Q136 47 137 73ZM140 627H137Q137 653 118.0 671.5Q99 690 73 690Q73 690 67.0 690.0Q61 690 61 690L60 700H140ZM199 73H202Q203 47 221.5 28.5Q240 10 266 10Q266 10 272.5 10.0Q279 10 279 10V0H199Z"/><path transform="translate(672,0)" d="M189 700H330Q375 700 411.5 687.0Q448 674 473.0 649.5Q498 625 511.5 590.5Q525 556 525 512Q525 464 502.5 420.0Q480 376 441.5 348.5Q403 321 355 321Q372 314 392.0 292.5Q412 271 427 251Q427 251 440.5 231.5Q454 212 474.5 184.0Q495 156 516.0 129.0Q537 102 552 86Q572 64 592.0 47.0Q612 30 635.5 20.0Q659 10 688 10V0H633Q587 0 553.5 14.0Q520 28 497.0 48.5Q474 69 458 88Q455 92 441.5 111.0Q428 130 409.5 156.5Q391 183 373.0 209.0Q355 235 342.0 253.5Q329 272 327 275Q308 300 285.0 321.0Q262 342 235 342V352Q235 352 250.5 351.5Q266 351 288 352Q314 353 345.0 360.0Q376 367 403.0 389.0Q430 411 444 456Q447 467 449.0 483.5Q451 500 450 516Q449 584 415.5 624.5Q382 665 326 668Q298 670 268.5 669.5Q239 669 219.0 669.0Q199 669 199 669Q199 670 196.5 677.5Q194 685 191.5 692.5Q189 700 189 700ZM202 700V0H137V700ZM140 73V0H60V10Q60 10 66.5 10.0Q73 10 73 10Q99 10 117.5 28.5Q136 47 137 73ZM140 627H137Q136 653 117.5 671.5Q99 690 73 690Q73 690 66.5 690.0Q60 690 60 690V700H140ZM199 73H202Q202 47 221.0 28.5Q240 10 266 10Q266 10 272.0 10.0Q278 10 278 10V0H199Z"/><path transform="translate(1444,0)" d="M429 714Q536 714 617.0 668.5Q698 623 743.5 541.0Q789 459 789 350Q789 241 743.5 159.0Q698 77 617.0 31.5Q536 -14 429 -14Q323 -14 242.0 31.5Q161 77 115.5 159.0Q70 241 70 350Q70 459 115.5 541.0Q161 623 242.0 668.5Q323 714 429 714ZM429 16Q514 16 577.5 58.0Q641 100 676.5 175.0Q712 250 712 350Q712 450 676.5 525.0Q641 600 577.5 642.0Q514 684 429 684Q345 684 281.5 642.0Q218 600 182.5 525.0Q147 450 147 350Q147 250 182.5 175.0Q218 100 281.5 58.0Q345 16 429 16Z"/><path transform="translate(2377,0)" d="M156 700 601 1H521L78 700ZM169 72Q160 58 164.0 43.5Q168 29 179.5 19.5Q191 10 204 10Q204 10 210.5 10.0Q217 10 217 10V0H-10V10H4Q36 10 63.0 28.0Q90 46 106 69ZM309 372 332 329 124 1H60ZM476 72 558 68Q574 45 601.0 27.5Q628 10 659 10H673V0H429V10Q429 10 435.0 10.0Q441 10 441 10Q462 10 475.5 30.0Q489 50 476 72ZM249 700V690Q249 690 243.0 690.0Q237 690 237 690Q224 690 212.5 680.5Q201 671 197.5 656.5Q194 642 202 628L122 631Q106 654 79.5 672.0Q53 690 21 690H7V700ZM586 700 351 354 317 378 521 700ZM654 700V690H640Q609 690 582.5 672.0Q556 654 539 631L475 628Q484 642 480.5 656.5Q477 671 466.0 680.5Q455 690 441 690Q441 690 435.0 690.0Q429 690 429 690V700Z"/><path transform="translate(3134,0)" d="M202 700V0H137V700ZM140 73V0H60V10Q60 10 66.5 10.0Q73 10 73 10Q99 10 117.5 28.5Q136 47 137 73ZM140 627H137Q136 653 117.5 671.5Q99 690 73 690Q73 690 66.5 690.0Q60 690 60 690V700H140ZM199 73H202Q203 47 221.5 28.5Q240 10 266 10Q266 10 272.0 10.0Q278 10 279 10V0H199ZM199 627V700H279V690Q278 690 272.0 690.0Q266 690 266 690Q240 690 221.5 671.5Q203 653 202 627Z"/><path transform="translate(3567,0)" d="M741 714 749 647 498 88Q498 88 490.5 71.0Q483 54 475.0 30.5Q467 7 464 -14H454L440 49ZM126 73V0H15V10Q16 10 23.5 10.0Q31 10 31 10Q58 10 79.0 26.5Q100 43 104 73ZM155 57Q155 56 155.0 55.0Q155 54 155 52Q155 36 166.5 22.5Q178 9 194 9H209V0H148V57ZM179 714H189L209 655L150 0H96ZM189 714 477 91 454 -14 170 602ZM750 714 836 0H758L703 606L741 714ZM806 73H827Q832 43 853.0 26.5Q874 10 900 10Q900 10 908.0 10.0Q916 10 916 10V0H806ZM753 57H760V0H699V9H714Q731 9 742.0 22.5Q753 36 753 52Q753 54 753.0 55.0Q753 56 753 57Z"/><path transform="translate(4593,0)" d="M429 714Q536 714 617.0 668.5Q698 623 743.5 541.0Q789 459 789 350Q789 241 743.5 159.0Q698 77 617.0 31.5Q536 -14 429 -14Q323 -14 242.0 31.5Q161 77 115.5 159.0Q70 241 70 350Q70 459 115.5 541.0Q161 623 242.0 668.5Q323 714 429 714ZM429 16Q514 16 577.5 58.0Q641 100 676.5 175.0Q712 250 712 350Q712 450 676.5 525.0Q641 600 577.5 642.0Q514 684 429 684Q345 684 281.5 642.0Q218 600 182.5 525.0Q147 450 147 350Q147 250 182.5 175.0Q218 100 281.5 58.0Q345 16 429 16Z"/></g></svg></span>
+      <span class="mark" aria-label="Proximo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 220 5431 812" role="img" aria-label="Proximo"><defs><linearGradient id="wm-dark" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#f2c877"/><stop offset="1" stop-color="#b87e2e"/></linearGradient><linearGradient id="wm-light" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#c1913b"/><stop offset="1" stop-color="#6f430e"/></linearGradient></defs><g transform="matrix(1 0 0 -1 0 976)"><path transform="translate(0,0)" d="M189 700H321Q385 700 431.0 677.0Q477 654 502.0 610.5Q527 567 527 507Q527 461 509.0 424.5Q491 388 461.0 363.0Q431 338 393.0 325.5Q355 313 314.5 316.0Q274 319 236 339V349Q236 349 253.0 346.5Q270 344 296.5 345.5Q323 347 352.5 356.5Q382 366 407.5 390.0Q433 414 446 457Q449 468 451.0 484.5Q453 501 452 517Q451 586 416.0 628.0Q381 670 317 670H199Q199 670 196.5 677.5Q194 685 191.5 692.5Q189 700 189 700ZM202 700V0H137V700ZM140 73V0H60V10Q60 10 66.5 10.0Q73 10 73 10Q99 10 117.5 28.5Q136 47 137 73ZM140 627H137Q137 653 118.0 671.5Q99 690 73 690Q73 690 67.0 690.0Q61 690 61 690L60 700H140ZM199 73H202Q203 47 221.5 28.5Q240 10 266 10Q266 10 272.5 10.0Q279 10 279 10V0H199Z"/><path transform="translate(672,0)" d="M189 700H330Q375 700 411.5 687.0Q448 674 473.0 649.5Q498 625 511.5 590.5Q525 556 525 512Q525 464 502.5 420.0Q480 376 441.5 348.5Q403 321 355 321Q372 314 392.0 292.5Q412 271 427 251Q427 251 440.5 231.5Q454 212 474.5 184.0Q495 156 516.0 129.0Q537 102 552 86Q572 64 592.0 47.0Q612 30 635.5 20.0Q659 10 688 10V0H633Q587 0 553.5 14.0Q520 28 497.0 48.5Q474 69 458 88Q455 92 441.5 111.0Q428 130 409.5 156.5Q391 183 373.0 209.0Q355 235 342.0 253.5Q329 272 327 275Q308 300 285.0 321.0Q262 342 235 342V352Q235 352 250.5 351.5Q266 351 288 352Q314 353 345.0 360.0Q376 367 403.0 389.0Q430 411 444 456Q447 467 449.0 483.5Q451 500 450 516Q449 584 415.5 624.5Q382 665 326 668Q298 670 268.5 669.5Q239 669 219.0 669.0Q199 669 199 669Q199 670 196.5 677.5Q194 685 191.5 692.5Q189 700 189 700ZM202 700V0H137V700ZM140 73V0H60V10Q60 10 66.5 10.0Q73 10 73 10Q99 10 117.5 28.5Q136 47 137 73ZM140 627H137Q136 653 117.5 671.5Q99 690 73 690Q73 690 66.5 690.0Q60 690 60 690V700H140ZM199 73H202Q202 47 221.0 28.5Q240 10 266 10Q266 10 272.0 10.0Q278 10 278 10V0H199Z"/><path transform="translate(1444,0)" d="M429 714Q536 714 617.0 668.5Q698 623 743.5 541.0Q789 459 789 350Q789 241 743.5 159.0Q698 77 617.0 31.5Q536 -14 429 -14Q323 -14 242.0 31.5Q161 77 115.5 159.0Q70 241 70 350Q70 459 115.5 541.0Q161 623 242.0 668.5Q323 714 429 714ZM429 16Q514 16 577.5 58.0Q641 100 676.5 175.0Q712 250 712 350Q712 450 676.5 525.0Q641 600 577.5 642.0Q514 684 429 684Q345 684 281.5 642.0Q218 600 182.5 525.0Q147 450 147 350Q147 250 182.5 175.0Q218 100 281.5 58.0Q345 16 429 16Z"/><path transform="translate(2377,0)" d="M156 700 601 1H521L78 700ZM169 72Q160 58 164.0 43.5Q168 29 179.5 19.5Q191 10 204 10Q204 10 210.5 10.0Q217 10 217 10V0H-10V10H4Q36 10 63.0 28.0Q90 46 106 69ZM309 372 332 329 124 1H60ZM476 72 558 68Q574 45 601.0 27.5Q628 10 659 10H673V0H429V10Q429 10 435.0 10.0Q441 10 441 10Q462 10 475.5 30.0Q489 50 476 72ZM249 700V690Q249 690 243.0 690.0Q237 690 237 690Q224 690 212.5 680.5Q201 671 197.5 656.5Q194 642 202 628L122 631Q106 654 79.5 672.0Q53 690 21 690H7V700ZM586 700 351 354 317 378 521 700ZM654 700V690H640Q609 690 582.5 672.0Q556 654 539 631L475 628Q484 642 480.5 656.5Q477 671 466.0 680.5Q455 690 441 690Q441 690 435.0 690.0Q429 690 429 690V700Z"/><path transform="translate(3134,0)" d="M202 700V0H137V700ZM140 73V0H60V10Q60 10 66.5 10.0Q73 10 73 10Q99 10 117.5 28.5Q136 47 137 73ZM140 627H137Q136 653 117.5 671.5Q99 690 73 690Q73 690 66.5 690.0Q60 690 60 690V700H140ZM199 73H202Q203 47 221.5 28.5Q240 10 266 10Q266 10 272.0 10.0Q278 10 279 10V0H199ZM199 627V700H279V690Q278 690 272.0 690.0Q266 690 266 690Q240 690 221.5 671.5Q203 653 202 627Z"/><path transform="translate(3567,0)" d="M741 714 749 647 498 88Q498 88 490.5 71.0Q483 54 475.0 30.5Q467 7 464 -14H454L440 49ZM126 73V0H15V10Q16 10 23.5 10.0Q31 10 31 10Q58 10 79.0 26.5Q100 43 104 73ZM155 57Q155 56 155.0 55.0Q155 54 155 52Q155 36 166.5 22.5Q178 9 194 9H209V0H148V57ZM179 714H189L209 655L150 0H96ZM189 714 477 91 454 -14 170 602ZM750 714 836 0H758L703 606L741 714ZM806 73H827Q832 43 853.0 26.5Q874 10 900 10Q900 10 908.0 10.0Q916 10 916 10V0H806ZM753 57H760V0H699V9H714Q731 9 742.0 22.5Q753 36 753 52Q753 54 753.0 55.0Q753 56 753 57Z"/><path transform="translate(4593,0)" d="M429 714Q536 714 617.0 668.5Q698 623 743.5 541.0Q789 459 789 350Q789 241 743.5 159.0Q698 77 617.0 31.5Q536 -14 429 -14Q323 -14 242.0 31.5Q161 77 115.5 159.0Q70 241 70 350Q70 459 115.5 541.0Q161 623 242.0 668.5Q323 714 429 714ZM429 16Q514 16 577.5 58.0Q641 100 676.5 175.0Q712 250 712 350Q712 450 676.5 525.0Q641 600 577.5 642.0Q514 684 429 684Q345 684 281.5 642.0Q218 600 182.5 525.0Q147 450 147 350Q147 250 182.5 175.0Q218 100 281.5 58.0Q345 16 429 16Z"/></g></svg></span>
       <p class="kicker">A Proxmox MCP server · the lanista's cut</p>
 
-      <h1 class="say carved">
-        <span class="cut">So — you mean to hand a machine</span>
-        <span class="cut">the keys to iron you love.</span>
-      </h1>
-      <p class="lede">Good. Then it takes what a fighter takes into the arena — every dangerous
+      <h1 class="say carved">So. You mean to hand a machine the keys to iron you love.</h1>
+      <p class="lede">Good. Then it takes what a fighter takes into the arena: every dangerous
         move <b>planned</b> before it lands, <b>proven</b> on a ledger that catches every edit,
         <b>undone</b> wherever the platform can snapshot. And <b>not one blade more.</b>
         Hand it the keys. Keep the receipts.</p>
@@ -315,7 +313,7 @@
     <div class="wrap">
       <p class="eyebrow">The kit</p>
       <h2 class="head carved">Armed with exactly what you need. Never more.</h2>
-      <p class="sub">Four pieces come standard — live, on the first call, before you grant a
+      <p class="sub">Four pieces come standard: live, on the first call, before you grant a
         thing. This is what a machine carries into <b>your</b> arena.</p>
 
       <div class="kit">
@@ -323,7 +321,7 @@
           <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4 9 15l-2 5 5-2L23 7z"/><path d="M4 20l3-1"/><path d="M14.5 6.5 17 9"/></svg>
           <h3>Plan</h3>
           <span class="weap">the blade you see before it falls</span>
-          <p>Every mutation returns its blast radius first — the exact change, the live state,
+          <p>Every mutation returns its blast radius first: the exact change, the live state,
             what it touches. Nothing strikes until you say <code>confirm=true</code>.</p>
         </div>
         <div class="piece">
@@ -344,12 +342,12 @@
           <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
           <h3>Diagnose</h3>
           <span class="weap">eyes on the field</span>
-          <p>A read-only evidence battery, node health, honest flags — it tells you what it
+          <p>A read-only evidence battery, node health, honest flags. It tells you what it
             <em>could not</em> see, so silence never reads as a clean bill.</p>
         </div>
       </div>
 
-      <p class="rack-note">Six more wait in the rack — consent, a kill-switch, a lease, a scope,
+      <p class="rack-note">Six more wait in the rack: consent, a kill-switch, a lease, a scope,
         an envelope, a taint-guard. You strap them on when you're ready; each becomes a real wall
         only once its state lives beyond the agent's own reach. <a href="https://github.com/john-broadway/proximo/blob/main/SECURITY.md">Read what each one defends →</a></p>
     </div>
@@ -360,29 +358,28 @@
   <!-- ========== THE OATH ========== -->
   <section class="oath">
     <div class="wrap">
-      <p class="eyebrow">The oath — the helmet comes off</p>
+      <p class="eyebrow">The oath · the helmet comes off</p>
       <h2 class="head carved">A lanista who lies to his fighters buries them.</h2>
-      <p class="sub">So here is what this weapon does <b>not</b> do. Read it before you trust it —
-        it's the same page the agents get, sharp edges first.</p>
+      <p class="sub">So here is what this weapon does <b>not</b> do. Read it before you trust it.
+        It's the same page the agents get, sharp edges first.</p>
 
       <ul class="vows">
         <li class="vow"><span class="x" aria-hidden="true">✕</span>
-          <p>Risk ratings are <b>advice, not armor.</b> <code>LOW</code> means "no state change" —
-            never "safe." The absence of a <code>HIGH</code> flag is not a safety signal.</p></li>
+          <p>Risk ratings are <b>advice, not armor.</b> <code>LOW</code> means "no state change," never "safe." The absence of a <code>HIGH</code> flag is not a safety signal.</p></li>
         <li class="vow"><span class="x" aria-hidden="true">✕</span>
           <p>UNDO covers the <b>snapshottable surface.</b> Firewall, SDN, ACL and token planes
-            have no rollback primitive — so Proximo claims none, rather than pretend one.</p></li>
+            have no rollback primitive, so Proximo claims none rather than pretend one.</p></li>
         <li class="vow"><span class="x" aria-hidden="true">✕</span>
           <p>The opt-in controls are a <b>discipline until you place their state outside the
-            agent's reach.</b> Inside one trust domain they're a habit, not a wall — said plainly.</p></li>
+            agent's reach.</b> Inside one trust domain they're a habit, not a wall. Said plainly.</p></li>
         <li class="vow"><span class="x" aria-hidden="true">✕</span>
           <p>The floor is <b>the token you mint.</b> Proxmox's own RBAC holds even if Proximo is
-            wholly compromised — a stronger promise than anything Proximo's code makes. Scope it
+            wholly compromised. A stronger promise than anything Proximo's code makes. Scope it
             to exactly what you mean to grant.</p></li>
       </ul>
 
       <p class="close">Don't take the word for any of it. Run <code>proximo doctor</code> to see
-        what a token can and can't do before an agent is wired in — or
+        what a token can and can't do before an agent is wired in, or
         <a href="https://github.com/john-broadway/proximo/blob/main/VERIFY.md">verify it yourself</a>,
         three receipts, no trust required.</p>
     </div>
@@ -398,26 +395,26 @@
       <div class="gates">
         <div class="gate">
           <h4>Preflight</h4>
-          <p>See exactly what a token can and cannot do — cold, before any AI touches it.</p>
+          <p>See exactly what a token can and cannot do: cold, before any AI touches it.</p>
           <div class="term"><span class="p">$</span> uvx proximo-proxmox doctor</div>
           <a href="https://github.com/john-broadway/proximo/blob/main/docs/SETUP.md">Token-first setup →</a>
         </div>
         <div class="gate">
           <h4>Arm</h4>
-          <p>Wire it into your MCP client. The secret is passed by file path — never inlined.</p>
+          <p>Wire it into your MCP client. The secret is passed by file path, never inlined.</p>
           <div class="term"><span class="p">$</span> uvx proximo-proxmox</div>
           <a href="https://github.com/john-broadway/proximo#quickstart">Quickstart →</a>
         </div>
         <div class="gate">
           <h4>Judge it first</h4>
           <p>Ten questions to ask before you hand any agent real infrastructure. Proximo's own
-            scorecard published — partials included.</p>
+            scorecard published, partials included.</p>
           <a href="https://john-broadway.github.io/keys-test/">The Keys Test →</a>
         </div>
       </div>
 
       <p class="freedom">He won his freedom in the arena, then opened the cages with the wooden
-        sword in his hand. <b>Your metal, your token, a ledger you own</b> — no cloud, no
+        sword in his hand. <b>Your metal, your token, a ledger you own.</b> No cloud, no
         phone-home, no toll booth, no standing server unless you ask for one.
         <span class="last">Win the crowd. Win your freedom.</span></p>
     </div>
@@ -432,7 +429,7 @@
       <a href="https://john-broadway.github.io/keys-test/">Keys Test</a>
       <a href="https://github.com/john-broadway/proximo/blob/main/SECURITY.md">Security</a>
       <span class="fine">A community project, standing on its own. Not affiliated with, or endorsed
-        by, Proxmox Server Solutions GmbH. Named for Proximo of <em>Gladiator</em> — the story is
+        by, Proxmox Server Solutions GmbH. Named for Proximo of <em>Gladiator</em>: the story is
         the design, joint for joint.</span>
     </div>
   </footer>
