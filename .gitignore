@@ -3,3 +3,6 @@ _site/
 .jekyll-metadata
 __pycache__/
 *.pyc
+
+# Session instructions — local only, never published (public-surface-audit, 2026-08-11)
+CLAUDE.md
