@@ -7,23 +7,23 @@ description: Layer duplication taken from Qwen3 (0.6B–32B) out across 10 archi
   <header>
     <h1>RYS on small language models</h1>
     <div class="subtitle">Qwen3 headline &middot; 10-architecture sweep &middot; zero training</div>
-    <p class="lead body-text">RYS &mdash; <em>Repeat Your Self</em> &mdash; duplicates a contiguous block of transformer layers so hidden states pass through the same reasoning circuit twice. <a href="https://dnhkng.github.io/posts/rys/">David Ng discovered it</a> on Qwen2-72B in March.</p>
-    <p>I ran it across Qwen3 at four sizes &mdash; 0.6B, 1.7B, 8B, 32B &mdash; using the same probe methodology at each, so the scaling shape of the result space is observable. Per-configuration sweep results ship alongside each model.</p>
+    <p class="lead body-text">RYS (<em>Repeat Your Self</em>) duplicates a contiguous block of transformer layers so hidden states pass through the same reasoning circuit twice. <a href="https://dnhkng.github.io/posts/rys/">David Ng discovered it</a> on Qwen2-72B in March.</p>
+    <p>I ran it across Qwen3 at four sizes (0.6B, 1.7B, 8B, 32B) using the same probe methodology at each, so the scaling shape of the result space is observable. Per-configuration sweep results ship alongside each model.</p>
   </header>
 
   <h2>Method</h2>
 
   <p class="body-text">Take a published model. Pick a contiguous run of transformer layers. Duplicate them in place, preserving order. The hidden state now passes through that block twice on its way to the next stage. The weights are unchanged. No retraining, no fine-tuning, no distillation. The model loads slightly larger and runs slightly slower.</p>
 
-  <p>Ng's framing is that certain blocks of layers act as indivisible cognitive circuits &mdash; routing them twice strengthens whatever capability that circuit carries. alainnothere's contribution was the search tool (<code>llm-circuit-finder</code>) that lets you sweep configurations and find the productive blocks per model.</p>
+  <p>Ng's framing is that certain blocks of layers act as indivisible cognitive circuits: routing them twice strengthens whatever capability that circuit carries. alainnothere's contribution was the search tool (<code>llm-circuit-finder</code>) that lets you sweep configurations and find the productive blocks per model.</p>
 
   <h2>What this run adds</h2>
 
-  <p class="body-text">Two things. First, breadth. Prior published runs covered specific single models. This run applies the same probe methodology across the Qwen3 family at four scales (0.6B, 1.7B, 8B, 32B), so the scaling shape of the result space &mdash; how the productive block, the metrics that move, and the trade-offs change as parameter count moves through three orders of magnitude &mdash; is directly comparable across sizes.</p>
+  <p class="body-text">Two things. First, breadth. Prior published runs covered specific single models. This run applies the same probe methodology across the Qwen3 family at four scales (0.6B, 1.7B, 8B, 32B), so the scaling shape of the result space (how the productive block, the metrics that move, and the trade-offs change as parameter count moves through three orders of magnitude) is directly comparable across sizes.</p>
 
-  <p>Second, the sweeps. Each model ships with its full per-configuration sweep results &mdash; not just the winning block, but every block tested with all three metrics. The shape of the result space matters as much as the peak.</p>
+  <p>Second, the sweeps. Each model ships with its full per-configuration sweep results: not just the winning block, but every block tested with all three metrics. The shape of the result space matters as much as the peak.</p>
 
-  <p>Since this run, the same probe methodology has gone wider still &mdash; across 10 architecture families (Qwen2.5, Llama, Mistral, Gemma, Yi, Granite, SmolLM, TinyLlama) from 135M to 32B, 22 model repos gathered in two Sovereign Collections. The Qwen3 study below stays the headline: cleanest scaling shape, strongest single result. <a href="https://huggingface.co/john-broadway">Full collection on Hugging Face.</a></p>
+  <p>Since this run, the same probe methodology has gone wider still: across 10 architecture families (Qwen2.5, Llama-3.1, Llama-3.2, Mistral, Gemma-2, Yi, Granite, SmolLM2, TinyLlama) from 135M to 32B, 22 model repos gathered in two Sovereign Collections. The Qwen3 study below stays the headline: cleanest scaling shape, strongest single result. <a href="https://huggingface.co/john-broadway">Full collection on Hugging Face.</a></p>
 
   <h2>Results</h2>
 
@@ -48,7 +48,7 @@ description: Layer duplication taken from Qwen3 (0.6B–32B) out across 10 archi
       <div class="stat"><div class="num">&minus;6%</div><div class="label">reasoning</div></div>
       <div class="stat"><div class="num">51</div><div class="label">configs</div></div>
     </div>
-    <p class="status">Largest math gain in the family. Reasoning drops &mdash; the trade is real at this scale.</p>
+    <p class="status">Largest math gain in the family. Reasoning drops. The trade is real at this scale.</p>
   </article>
 
   <article class="card">
@@ -75,9 +75,9 @@ description: Layer duplication taken from Qwen3 (0.6B–32B) out across 10 archi
     <p class="status">The only configuration that improves all three metrics simultaneously out of 63 tested.</p>
   </article>
 
-  <p>Three benchmarks measured per configuration: math, EQ (emotional reasoning), and reasoning (multi-step). Numbers come straight off the sweep results in each model's HF repo &mdash; see the JSONLs for the exact suites and raw scores.</p>
+  <p>Three benchmarks measured per configuration: math, EQ (emotional reasoning), and reasoning (multi-step). Numbers come straight off the sweep results in each model's HF repo. See the JSONLs for the exact suites and raw scores.</p>
 
-  <p class="status">A caveat earned since: these scores come from thin search probes (16 math / 16 EQ / 17 reasoning, coarsely quantized). They are a good heuristic for <em>finding</em> productive duplication blocks, but a poor capability benchmark &mdash; and at small scale (&le;~1.5B) their failure modes can manufacture apparent gains that don't reproduce on a full benchmark. Read the small-model deltas as search signal, not capability claims; the evidence is most trustworthy at the largest scales, where RYS was first demonstrated.</p>
+  <p class="status">A caveat earned since: these scores come from thin search probes (16 math / 16 EQ / 17 reasoning, coarsely quantized). They are a good heuristic for <em>finding</em> productive duplication blocks, but a poor capability benchmark, and at small scale (&le;~1.5B) their failure modes can manufacture apparent gains that don't reproduce on a full benchmark. Read the small-model deltas as search signal, not capability claims; the evidence is most trustworthy at the largest scales, where RYS was first demonstrated.</p>
 
   <h2>Models</h2>
 
@@ -88,22 +88,22 @@ description: Layer duplication taken from Qwen3 (0.6B–32B) out across 10 archi
     <a href="https://huggingface.co/john-broadway/Qwen3-32B-RYS-20-28-GGUF">32B</a>
   </p>
 
-  <p>All four are GGUF Q4_K_M quantizations &mdash; small enough for consumer GPUs. The 0.6B is 424&nbsp;MB; the 32B is 22&nbsp;GB. Run with <code>llama.cpp</code> or <code>llama-cpp-python</code>; no special inference path needed. The model card on each repo has a copy-paste invocation.</p>
+  <p>All four are GGUF Q4_K_M quantizations, small enough for consumer GPUs. The 0.6B is 424&nbsp;MB; the 32B is 22&nbsp;GB. Run with <code>llama.cpp</code> or <code>llama-cpp-python</code>; no special inference path needed. The model card on each repo has a copy-paste invocation.</p>
 
   <h2>License &amp; cost</h2>
 
-  <p class="body-text">The Qwen3 models here are Apache 2.0; across the wider sweep, each model inherits its base model's license. Training cost: zero &mdash; there is no training. The artifacts are GGUF Q4_K_M; the 0.6B and 1.7B run on integrated GPUs, the 8B fits on most consumer cards, the 32B wants 24&nbsp;GB of VRAM.</p>
+  <p class="body-text">The Qwen3 models here are Apache 2.0; across the wider sweep, each model inherits its base model's license. Training cost: zero. There is no training. The artifacts are GGUF Q4_K_M; the 0.6B and 1.7B run on integrated GPUs, the 8B fits on most consumer cards, the 32B wants 24&nbsp;GB of VRAM.</p>
 
   <h2>Datasets</h2>
 
-  <p>Per-configuration sweep results &mdash; every block tried, every metric collected &mdash; ship as JSONLs inside each model's HF repo.</p>
+  <p>Per-configuration sweep results ship as JSONLs inside each model's HF repo: every block tried, every metric collected.</p>
 
   <h2>Sources</h2>
 
   <ul class="values">
-    <li><strong>Original discovery</strong> &mdash; David Ng, <a href="https://dnhkng.github.io/posts/rys/">LLM Neuroanatomy: How I Topped the LLM Leaderboard Without Changing a Single Weight</a> (blog post, March 2026). Qwen2-72B, layers 45&ndash;51.</li>
-    <li><strong>Search tool &amp; mid-scale replication</strong> &mdash; alainnothere, <a href="https://github.com/alainnothere/llm-circuit-finder">llm-circuit-finder</a>. Sharp-boundary finding, Qwen2.5-32B and Devstral-24B.</li>
-    <li><strong>This work</strong> &mdash; same method applied across Qwen3 at four sizes (0.6B, 1.7B, 8B, 32B), full per-configuration sweeps; extended in a follow-on sweep to 10 architecture families, 135M&ndash;32B. All artifacts at <a href="https://huggingface.co/john-broadway">huggingface.co/john-broadway</a>.</li>
+    <li><strong>Original discovery:</strong> David Ng, <a href="https://dnhkng.github.io/posts/rys/">LLM Neuroanatomy: How I Topped the LLM Leaderboard Without Changing a Single Weight</a> (blog post, March 2026). Qwen2-72B, layers 45&ndash;51.</li>
+    <li><strong>Search tool &amp; mid-scale replication:</strong> alainnothere, <a href="https://github.com/alainnothere/llm-circuit-finder">llm-circuit-finder</a>. Sharp-boundary finding, Qwen2.5-32B and Devstral-24B.</li>
+    <li><strong>This work:</strong> same method applied across Qwen3 at four sizes (0.6B, 1.7B, 8B, 32B), full per-configuration sweeps; extended in a follow-on sweep to 10 architecture families, 135M&ndash;32B. All artifacts at <a href="https://huggingface.co/john-broadway">huggingface.co/john-broadway</a>.</li>
   </ul>
 
   <div class="tags"><span>RYS</span><span>SLM</span><span>Qwen3</span><span>Layer Duplication</span><span>Zero Training</span></div>
