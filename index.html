@@ -28,14 +28,14 @@ description: Independent AI researcher and infrastructure architect. Sovereign A
 
   <article class="card">
     <h3><a href="/rys/">RYS on small language models &mdash; Qwen3 headline, 10-architecture sweep</a></h3>
-    <p>RYS &mdash; <em>Repeat Your Self</em>, David Ng's method &mdash; duplicates a block of transformer layers so hidden states pass through the same reasoning circuit twice. I ran it on four Qwen3 sizes (0.6B, 1.7B, 8B, 32B) using alainnothere's <code>llm-circuit-finder</code> for the probe sweep &mdash; then took the same method across 10 architecture families, 135M to 32B. Zero training, zero weight changes &mdash; architectural surgery.</p>
+    <p>RYS (<em>Repeat Your Self</em>, David Ng's method) duplicates a block of transformer layers so hidden states pass through the same reasoning circuit twice. I ran it on four Qwen3 sizes (0.6B, 1.7B, 8B, 32B) using alainnothere's <code>llm-circuit-finder</code> for the probe sweep, then took the same method across 10 architecture families, 135M to 32B. Zero training, zero weight changes. Architectural surgery.</p>
     <div class="stats">
       <div class="stat"><div class="num">+6.3%</div><div class="label">math probe at 0.6B</div></div>
       <div class="stat"><div class="num">10</div><div class="label">architectures</div></div>
       <div class="stat"><div class="num">22</div><div class="label">model repos</div></div>
       <div class="stat"><div class="num">$0</div><div class="label">training cost</div></div>
     </div>
-    <p class="status">22 model repos and full per-configuration sweeps on <a href="https://huggingface.co/john-broadway">Hugging Face</a> &mdash; 135M to 32B, two Sovereign Collections. Per-model licenses. <strong>Read the small-model numbers as search signal, not capability claims.</strong> They come from thin probes, and at small scale those probes can manufacture apparent gains that do not reproduce on a full benchmark. The evidence is most trustworthy at the largest scales, where RYS was first demonstrated. <a href="/rys/">The caveat in full</a>.</p>
+    <p class="status">22 model repos and full per-configuration sweeps on <a href="https://huggingface.co/john-broadway">Hugging Face</a>: 135M to 32B, two Sovereign Collections. Per-model licenses. <strong>Read the small-model numbers as search signal, not capability claims.</strong> They come from thin probes, and at small scale those probes can manufacture apparent gains that do not reproduce on a full benchmark. The evidence is most trustworthy at the largest scales, where RYS was first demonstrated. <a href="/rys/">The caveat in full</a>.</p>
     <div class="tags"><span>RYS</span><span>SLM</span><span>Cross-Architecture</span><span>Bare Metal</span></div>
   </article>
 
@@ -43,21 +43,21 @@ description: Independent AI researcher and infrastructure architect. Sovereign A
 
   <article class="card">
     <h3><a href="https://github.com/john-broadway/proximo">Proximo &mdash; the Proxmox MCP you can hand the keys</a></h3>
-    <p>Most Proxmox MCPs make you choose: a read-only inspector that's safe because it can't touch anything, or a loaded gun aimed at a cluster you care about. Proximo refuses the trade &mdash; every dangerous move is planned (blast-radius preview first), undoable (it snapshots before it acts), and proven (a tamper-evident audit ledger). Hand an AI agent the keys; keep the receipts.</p>
-    <p>Four Proxmox surfaces on one trust core &mdash; Virtual Environment, Backup Server, Mail Gateway, and Datacenter Manager &mdash; over MCP and A2A. Before you hand <em>any</em> tool the keys: <a href="/keys-test/">the Keys Test</a> &mdash; ten questions, this tool scored first.</p>
+    <p>Most Proxmox MCPs make you pick: a read-only toy, or full keys and pray. I wasn't going to pick. Every dangerous move is planned (blast-radius preview first), undoable (it snapshots before it acts), and proven (a tamper-evident audit ledger). Hand an AI agent the keys; keep the receipts.</p>
+    <p>Four Proxmox surfaces on one trust core: Virtual Environment, Backup Server, Mail Gateway, and Datacenter Manager, over MCP and A2A. Before you hand <em>any</em> tool the keys: <a href="/keys-test/">the Keys Test</a>. Ten questions, this tool scored first.</p>
     <div class="stats">
       <div class="stat"><div class="num">906</div><div class="label">tools</div></div>
       <div class="stat"><div class="num">4</div><div class="label">surfaces</div></div>
       <div class="stat"><div class="num">10</div><div class="label">trust controls</div></div>
       <div class="stat"><div class="num">11,000+</div><div class="label">tests</div></div>
     </div>
-    <p class="status">v0.31.2 (2026-08-08) &mdash; live on <a href="https://pypi.org/project/proximo-proxmox/">PyPI</a> (<code>uvx proximo-proxmox</code>), <a href="https://github.com/john-broadway/proximo">GitHub</a>, and GHCR (signed multi-arch image). 906 tools + 5 safe-runbook prompts across four surfaces; the trust core live-proven against real PVE 9.2, PBS 4.2, PMG 9.1, and PDM 1.1.4. 0.31.2 is the audit release: eight adversarial finder teams over our own 0.31.1, every verified finding fixed &mdash; webhook secrets out of the audit ledger, host-crossing config rated honestly, caller badges that expire, a <code>--help</code> that prints help. (0.31.1 moved both <code>cryptography</code> bounds past a HIGH advisory our own cap was blocking.) Apache 2.0.</p>
+    <p class="status">v0.31.2 (2026-08-08): live on <a href="https://pypi.org/project/proximo-proxmox/">PyPI</a> (<code>uvx proximo-proxmox</code>), <a href="https://github.com/john-broadway/proximo">GitHub</a>, and GHCR (signed multi-arch image). 906 tools + 5 safe-runbook prompts across four surfaces; the trust core live-proven against real PVE 9.2, PBS 4.2, PMG 9.1, and PDM 1.1.4. 0.31.2 is the audit release: eight adversarial finder teams over our own 0.31.1, every verified finding fixed. Webhook secrets out of the audit ledger, host-crossing config rated honestly, caller badges that expire, a <code>--help</code> that prints help. (0.31.1 moved both <code>cryptography</code> bounds past a HIGH advisory our own cap was blocking.) Apache 2.0.</p>
     <div class="tags"><span>Proxmox</span><span>MCP</span><span>A2A</span><span>Trust Layer</span></div>
   </article>
 
   <article class="card">
     <h3><a href="https://github.com/john-broadway/pacioli">Pacioli &mdash; no debit without a credit, for AI on the books</a></h3>
-    <p>Luca Pacioli published double-entry in 1494, and not because merchants could not count. It was because they could not trust. Same fix, five centuries on, for an owner who cannot stand over every agent touching the books.</p>
+    <p>Luca Pacioli gave merchants double-entry in 1494 so owners could trust books they didn't keep themselves. Same problem, five centuries later, with AI on the books.</p>
     <p>Two artifacts, one law. <code>pacioli-guard</code> is a deny-by-default credential floor for ERPNext: it binds any api-key, a Zapier flow, a cron job, a vendor token, an AI agent, to an allowlist of methods and DocTypes, enforced at the credential layer through the <code>auth_hooks</code> extension point. No core fork. <code>pacioli</code> is the governed broker that stands on that floor, an MCP and A2A door where every write runs through <strong>PLAN, CONSENT, PROVE, UNDO</strong>. A door admits. It never decides.</p>
     <div class="stats">
       <div class="stat"><div class="num">265</div><div class="label">tools</div></div>
@@ -65,7 +65,7 @@ description: Independent AI researcher and infrastructure architect. Sovereign A
       <div class="stat"><div class="num">4</div><div class="label">gates per write</div></div>
       <div class="stat"><div class="num">3,300+</div><div class="label">tests</div></div>
     </div>
-    <p class="status">v0.36.0 (2026-08-08) &mdash; live on <a href="https://pypi.org/project/pacioli/">PyPI</a> (<code>pip install pacioli</code>), <a href="https://github.com/john-broadway/pacioli">GitHub</a>, and the MCP registry, with <code>pacioli-guard</code> 0.13.0 holding the floor underneath. 0.36.0 is the doorway: a searchable catalog instead of 265 resident schemas, so an agent carries the handful of tools it actually needs rather than the whole estate on the wire, and the default surface is unchanged for anyone who does not ask for it. The consent floor has run a real PLAN, CONSENT, PROVE against an enforcing ERPNext bench, not a mock. Apache 2.0.</p>
+    <p class="status">v0.36.0 (2026-08-08): live on <a href="https://pypi.org/project/pacioli/">PyPI</a> (<code>pip install pacioli</code>), <a href="https://github.com/john-broadway/pacioli">GitHub</a>, and the MCP registry, with <code>pacioli-guard</code> 0.13.0 holding the floor underneath. 0.36.0 is the doorway: a searchable catalog instead of 265 resident schemas, so an agent carries the handful of tools it actually needs rather than the whole estate on the wire, and the default surface is unchanged for anyone who does not ask for it. The consent floor has run a real PLAN, CONSENT, PROVE against an enforcing ERPNext bench, not a mock. Apache 2.0.</p>
     <div class="tags"><span>ERPNext</span><span>MCP</span><span>A2A</span><span>Governance</span></div>
   </article>
 
@@ -73,17 +73,17 @@ description: Independent AI researcher and infrastructure architect. Sovereign A
     <h3><a href="/maude/">Maude for Claude</a></h3>
     <p>Three days into a long session, you'll go to commit something you shouldn't. She catches it. He writes the code; she keeps the house.</p>
     <p>No daemon, no database, no backend. Markdown, JSON, bash, and stdlib python &mdash; that's the whole surface. Each session, fresh.</p>
-    <p class="status">v0.27.4 (2026-08-08) &mdash; the catch-up: v0.25.0 through v0.27.4 public in one merge. The gate keys on the target now, not the verb &mdash; is the thing being destroyed a sole copy? &mdash; after a verb table let a photo-deleting glob straight through. <code>/maude:undo</code> snapshots before every write the gate allows and puts the bytes back. RED-tier clears cost a one-time hash-chain marker Claude cannot mint. She checks her own closet at wake: an installed plugin that drifted from its source gets named, because merged is not installed. And her own ship rail refused this very release twice &mdash; the author's machine paths in the incident stories, then a test fixture wearing the exact shape the guard hunts. Apache 2.0.</p>
+    <p class="status">v0.27.4 (2026-08-08), the catch-up: v0.25.0 through v0.27.4 public in one merge. The gate keys on the target now, not the verb (is the thing being destroyed a sole copy?) after a verb table let a photo-deleting glob straight through. <code>/maude:undo</code> snapshots before every write the gate allows and puts the bytes back. RED-tier clears cost a one-time hash-chain marker Claude cannot mint. She checks her own closet at wake: an installed plugin that drifted from its source gets named, because merged is not installed. And her own ship rail refused this very release twice: the author's machine paths in the incident stories, then a test fixture wearing the exact shape the guard hunts. Apache 2.0.</p>
     <div class="tags"><span>Claude Code</span><span>Plugin</span><span>Partner</span></div>
   </article>
 
   <h2>Values</h2>
 
   <ul class="values">
-    <li><strong>AI partnership</strong> &mdash; not chatbots, not assistants. Partners.</li>
-    <li><strong>Sovereign by default</strong> &mdash; every agent owns its domain. No shared brains, no cloud dependency.</li>
-    <li><strong>Right-sized systems</strong> &mdash; maximum output from minimum input. A well-tuned small model beats a lazy big one.</li>
-    <li><strong>Governance-as-code</strong> &mdash; autonomy without accountability isn't autonomy, it's negligence.</li>
+    <li><strong>AI partnership.</strong> Not chatbots, not assistants. Partners.</li>
+    <li><strong>Sovereign by default.</strong> Every agent owns its domain. No shared brains, no cloud dependency.</li>
+    <li><strong>Right-sized systems.</strong> Maximum output from minimum input. A well-tuned small model beats a lazy big one.</li>
+    <li><strong>Governance-as-code.</strong> Autonomy without accountability is negligence.</li>
   </ul>
 
   <h2>Buddy</h2>
