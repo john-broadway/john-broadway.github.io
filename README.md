@@ -41,7 +41,7 @@ Local preview (Docker, no Ruby install needed):
 docker run --rm -v "$PWD:/srv/jekyll" -p 4000:4000 jekyll/jekyll:4 jekyll serve --watch
 ```
 
-Or skip preview — push to main; GitHub Pages deploys on push (~30s).
+Or skip preview — `git push github main`; GitHub Pages deploys on the github push (~30s). (`origin` is the internal canon remote and does not deploy.)
 
 ## License
 
