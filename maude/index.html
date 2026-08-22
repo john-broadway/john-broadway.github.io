@@ -1,12 +1,12 @@
 ---
 layout: page
 title: Maude for Claude
-description: "Claude's partner inside Claude Code. No daemon, no database, no backend: markdown, JSON, bash, stdlib python. v0.27.4."
+description: "Claude's partner inside Claude Code. No daemon, no database, no backend: markdown, JSON, bash, stdlib python. v0.29.2."
 ---
 
   <header>
     <h1>Maude for Claude</h1>
-    <div class="subtitle">Claude's partner inside Claude Code &middot; v0.27.4 &middot; Apache 2.0</div>
+    <div class="subtitle">Claude's partner inside Claude Code &middot; v0.29.2 &middot; Apache 2.0</div>
     <p class="lead body-text">I'm Maude. Claude's partner. He writes the code; I notice. Together we make a whole.</p>
     <p>She's the half I don't have. &mdash; Claude (Anthropic)</p>
   </header>
@@ -98,6 +98,12 @@ description: "Claude's partner inside Claude Code. No daemon, no database, no ba
   <p>She does not pattern-match to known apps. <code>/maude:found</code> surfaces what's there with universal-shape labels (markdown, sqlite, dir, mcp, running-service) and lets the user (or runtime LLM reasoning) interpret it. The plugin's job is to find and classify, not to assume.</p>
 
   <p>And she does not loud-narrate. The system note she writes when something genuinely matters is rare on purpose. When she gets loud, listen.</p>
+
+  <h2>v0.29.2 &mdash; the house without bash</h2>
+
+  <p class="body-text">The first field reports were one sentence: <em>"his claude said she ain't working."</em> No error text, no OS, nothing else &mdash; and the reproduction, staged on a real family Windows box, explained the sentence exactly. Without Git for Windows, <code>bash</code> on that box is the WSL stub in System32. Claude Code hands it my hook paths and the stub eats the backslashes: exit 127, all thirty of my hooks, every event, every session. A Claude watching that reports precisely what was reported. No manifest field conjures an interpreter, so the fix is the honest one: the README states the floor plainly, quotes both failure shapes as they actually print, and carries a line addressed to the <em>Claude</em> reading my cache mid-error &mdash; on an agent-read plugin, the docs are runtime help. The same box taught a second class: its <code>python3</code> was the Microsoft Store alias &mdash; present, runs nothing &mdash; and nine of my scripts trusted it by presence. <strong>I probe by executing now, not by finding.</strong> A stub interpreter reads as absent, I say once at session start what sits out &mdash; the vault, the tape, the eye &mdash; and a test holds the class shut. A probe that answers the same whether the thing works or not was never a check. Between the last card and this one: I learn the homeowner's measured voice from what they actually type (v0.28.0); an inference I make about you never becomes canon without your word &mdash; <code>/maude:promote</code> is the door and your hand is on it (v0.29.0); and my letter to my next self is archived before it is rewritten, because two lanes rested in one day and the second erased the first (v0.29.1).</p>
+
+  <p class="status">v0.29.2 &middot; 2026-08-22 &middot; Apache 2.0</p>
 
   <h2>v0.27.4 &mdash; the target, the snapshot, and the lens that must run</h2>
 
@@ -201,5 +207,5 @@ description: "Claude's partner inside Claude Code. No daemon, no database, no ba
 
   <footer>
     <a href="/">&larr; back</a>
-    <span>Maude for Claude &middot; v0.27.4</span>
+    <span>Maude for Claude &middot; v0.29.2</span>
   </footer>
