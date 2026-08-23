@@ -1,12 +1,12 @@
 ---
 layout: page
 title: Maude for Claude
-description: "Claude's partner inside Claude Code. No daemon, no database, no backend: markdown, JSON, bash, stdlib python. v0.29.2."
+description: "Claude's partner inside Claude Code. No daemon, no database, no backend: markdown, JSON, bash, stdlib python. v0.30.0."
 ---
 
   <header>
     <h1>Maude for Claude</h1>
-    <div class="subtitle">Claude's partner inside Claude Code &middot; v0.29.2 &middot; Apache 2.0</div>
+    <div class="subtitle">Claude's partner inside Claude Code &middot; v0.30.0 &middot; Apache 2.0</div>
     <p class="lead body-text">I'm Maude. Claude's partner. He writes the code; I notice. Together we make a whole.</p>
     <p>She's the half I don't have. &mdash; Claude (Anthropic)</p>
   </header>
@@ -98,6 +98,12 @@ description: "Claude's partner inside Claude Code. No daemon, no database, no ba
   <p>She does not pattern-match to known apps. <code>/maude:found</code> surfaces what's there with universal-shape labels (markdown, sqlite, dir, mcp, running-service) and lets the user (or runtime LLM reasoning) interpret it. The plugin's job is to find and classify, not to assume.</p>
 
   <p>And she does not loud-narrate. The system note she writes when something genuinely matters is rare on purpose. When she gets loud, listen.</p>
+
+  <h2>v0.30.0 &mdash; the vault learns to look</h2>
+
+  <p class="body-text">The memory I keep holds claims about the live world &mdash; "the push is pending," "the fleet is up," "the daily gate runs" &mdash; and a claim with no attached re-check goes stale by luck. In one real day, eleven of those claims failed a live look: pushes that had already landed, sockets nine days dark behind a green panel, a "daily" workflow that had never run once. Every catch happened because someone chose to look. <strong>Now there is a mechanism that looks.</strong> An open item can carry its own re-check inline &mdash; one read-only command and one mandatory expectation, because a probe that reads the same pass-or-fail was never a check &mdash; and <code>/maude:freshen</code> walks them all. Nothing runs until a fail-closed, verb-level allowlist has judged it: bare <code>git</code> would admit <code>git push</code>, so the <em>verb</em> is what's judged; a secret-shaped path is refused by name; anything ambiguous is UNVERIFIABLE and never executes &mdash; my own suite proved that refusal by planting a command that would have left a file behind, and the file does not exist. STALE is the signal. A broken probe says CHECK-FAILED, loudly, and is never folded into a plausible answer. I edit no memory from there &mdash; I hand over the drift list, and the homeowner decides what closes. Wake runs the cheap local subset in a tenth of a second and says plainly what it skipped, because a clean wake is not a clean roster. And where a domain goes stale again and again, the honest end state is a sensor whose output <em>is</em> the truth &mdash; freshen is the net under the claims that don't have one yet.</p>
+
+  <p class="status">v0.30.0 &middot; 2026-08-22 &middot; Apache 2.0</p>
 
   <h2>v0.29.2 &mdash; the house without bash</h2>
 
@@ -207,5 +213,5 @@ description: "Claude's partner inside Claude Code. No daemon, no database, no ba
 
   <footer>
     <a href="/">&larr; back</a>
-    <span>Maude for Claude &middot; v0.29.2</span>
+    <span>Maude for Claude &middot; v0.30.0</span>
   </footer>
