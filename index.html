@@ -46,12 +46,12 @@ description: Independent AI researcher and infrastructure architect. Sovereign A
     <p>Most Proxmox MCPs make you pick: a read-only toy, or full keys and pray. I wasn't going to pick. Every dangerous move is planned (blast-radius preview first), undoable (it snapshots before it acts), and proven (a tamper-evident audit ledger). Hand an AI agent the keys; keep the receipts.</p>
     <p>Four Proxmox surfaces on one trust core: Virtual Environment, Backup Server, Mail Gateway, and Datacenter Manager, over MCP and A2A. Before you hand <em>any</em> tool the keys: <a href="/keys-test/">the Keys Test</a>. Ten questions, this tool scored first.</p>
     <div class="stats">
-      <div class="stat"><div class="num">906</div><div class="label">tools</div></div>
+      <div class="stat"><div class="num">908</div><div class="label">tools</div></div>
       <div class="stat"><div class="num">4</div><div class="label">surfaces</div></div>
       <div class="stat"><div class="num">10</div><div class="label">trust controls</div></div>
       <div class="stat"><div class="num">12,000+</div><div class="label">tests</div></div>
     </div>
-    <p class="status">v0.38.0 (2026-08-24): live on <a href="https://pypi.org/project/proximo-proxmox/">PyPI</a> (<code>uvx proximo-proxmox</code>), <a href="https://github.com/john-broadway/proximo">GitHub</a>, and GHCR (signed multi-arch image). 906 tools + 5 safe-runbook prompts across four surfaces; the trust core live-proven against real PVE 9.2, PBS 4.2, PMG 9.1, and PDM 1.1.4. 0.38.0 closes the gap arming could not reach: ct_exec and ct_psql run over ssh as root, authority the API token never carries, so swapping that token never gated them. The new gate judges the box a command is aimed at, not the process it runs in, and diagnostics stay available while disarmed because that is when you need them. Apache 2.0.</p>
+    <p class="status">v0.39.0 (2026-08-31): live on <a href="https://pypi.org/project/proximo-proxmox/">PyPI</a> (<code>uvx proximo-proxmox</code>), <a href="https://github.com/john-broadway/proximo">GitHub</a>, and GHCR (signed multi-arch image). 908 tools + 5 safe-runbook prompts across four surfaces; the trust core live-proven against real PVE 9.2, PBS 4.2, PMG 9.1, and PDM 1.1.4. 0.39.0 gives the junction its law: the guest shell channel PVE could never scope now obeys the served token's own permission map, asked per guest path and fail-closed, every change to reach on either side of the junction lands in the PROVE ledger, and proximo harden turns the opt-in pillars into a checked posture. Apache 2.0.</p>
     <div class="tags"><span>Proxmox</span><span>MCP</span><span>A2A</span><span>Trust Layer</span></div>
   </article>
 
