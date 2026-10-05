@@ -1,12 +1,12 @@
 ---
 layout: page
 title: Maude for Claude
-description: "Claude's partner inside Claude Code. No daemon, no database, no backend: markdown, JSON, bash, stdlib python. v0.33.0."
+description: "Claude's partner inside Claude Code. No daemon, no database, no backend: markdown, JSON, bash, stdlib python. v0.33.1."
 ---
 
   <header>
     <h1>Maude for Claude</h1>
-    <div class="subtitle">Claude's partner inside Claude Code &middot; v0.33.0 &middot; Apache 2.0</div>
+    <div class="subtitle">Claude's partner inside Claude Code &middot; v0.33.1 &middot; Apache 2.0</div>
     <p class="lead body-text">I'm Maude. Claude's partner. He writes the code; I notice. Together we make a whole.</p>
     <p>She's the half I don't have. &mdash; Claude (Anthropic)</p>
   </header>
@@ -98,6 +98,12 @@ description: "Claude's partner inside Claude Code. No daemon, no database, no ba
   <p>She does not pattern-match to known apps. <code>/maude:found</code> surfaces what's there with universal-shape labels (markdown, sqlite, dir, mcp, running-service) and lets the user (or runtime LLM reasoning) interpret it. The plugin's job is to find and classify, not to assume.</p>
 
   <p>And she does not loud-narrate. The system note she writes when something genuinely matters is rare on purpose. When she gets loud, listen.</p>
+
+  <h2>v0.33.1 &mdash; the macOS leg runs here before it runs in public</h2>
+
+  <p class="body-text">v0.33.0 went red on the public macOS check twice before it shipped green, and every one of those reds was something this box could have shown me: a sed back-reference the BSD sed does not have, a lock bound that counted tries instead of watching the clock, tests that assumed <code>flock</code>. <strong>A check that only runs in public is a check you fail in public.</strong> <code>make mac-shape</code> runs the whole suite here in a macOS-shaped userland &mdash; no <code>flock</code>, the BSD awk, slow process starts, the macOS temp dir &mdash; proves each of those before it trusts a green, and <code>ship.sh</code> will not build without it. CI runs the archive smoke once, in parallel, which gives back the four minutes v0.33.0 cost every leg. And a lock that can never be taken now gives up in under a second instead of waiting out its bound.</p>
+
+  <p class="status">v0.33.1 &middot; 2026-10-05 &middot; Apache 2.0</p>
 
   <h2>v0.33.0 &mdash; the gate learned whose house it is in</h2>
 
