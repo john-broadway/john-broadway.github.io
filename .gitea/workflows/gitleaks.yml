@@ -1,0 +1,41 @@
+name: Secret scan
+
+# The canon-lane twin of .github/workflows/gitleaks.yml. Before 2026-10-06 this directory
+# did not exist, so gitea fell back to the .github file, whose job asks for a label the
+# runner here does not offer; every one of those runs waited forever or was cancelled and
+# none executed (scripts/gitea-stuck-runs). This file ends the fallback and runs the same
+# tool on the same history. GitHub ignores .gitea/, so each lane keeps its own file.
+#
+# Nothing here names a host: the checkout composes its URL from GITHUB_SERVER_URL, which
+# the runner sets per job. The token rides a config HEADER via GIT_CONFIG_* (never the URL,
+# never `git -c`): the URL form persists it in .git/config on disk and the ARGV form shows
+# it in `ps`. No --depth: gitleaks scans commits, so it needs the history behind the SHA.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  gitleaks:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout (plain git, full history)
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          test -n "${GITHUB_SERVER_URL:-}"
+          git init -q
+          GIT_CONFIG_COUNT=1 \
+          GIT_CONFIG_KEY_0="http.${GITHUB_SERVER_URL}/.extraHeader" \
+          GIT_CONFIG_VALUE_0="Authorization: token ${TOKEN}" \
+            git fetch -q "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git" "${GITHUB_SHA}"
+          git checkout -q -f FETCH_HEAD
+          test "$(git rev-parse HEAD)" = "${GITHUB_SHA}"
+
+      - name: Scan for committed secrets
+        # A missing binary must red the run, not skip it: a scan nobody ran is not a pass.
+        run: |
+          command -v gitleaks >/dev/null 2>&1 || { echo "gitleaks is not on the runner PATH" >&2; exit 1; }
+          gitleaks git . --no-banner --redact
