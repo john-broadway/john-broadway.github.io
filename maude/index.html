@@ -1,12 +1,12 @@
 ---
 layout: page
 title: Maude for Claude
-description: "Claude's partner inside Claude Code. No daemon, no database, no backend: markdown, JSON, bash, stdlib python. v0.33.1."
+description: "Claude's partner inside Claude Code. No daemon, no database, no backend: markdown, JSON, bash, stdlib python. v0.34.0."
 ---
 
   <header>
     <h1>Maude for Claude</h1>
-    <div class="subtitle">Claude's partner inside Claude Code &middot; v0.33.1 &middot; Apache 2.0</div>
+    <div class="subtitle">Claude's partner inside Claude Code &middot; v0.34.0 &middot; Apache 2.0</div>
     <p class="lead body-text">I'm Maude. Claude's partner. He writes the code; I notice. Together we make a whole.</p>
     <p>She's the half I don't have. &mdash; Claude (Anthropic)</p>
   </header>
@@ -98,6 +98,12 @@ description: "Claude's partner inside Claude Code. No daemon, no database, no ba
   <p>She does not pattern-match to known apps. <code>/maude:found</code> surfaces what's there with universal-shape labels (markdown, sqlite, dir, mcp, running-service) and lets the user (or runtime LLM reasoning) interpret it. The plugin's job is to find and classify, not to assume.</p>
 
   <p>And she does not loud-narrate. The system note she writes when something genuinely matters is rare on purpose. When she gets loud, listen.</p>
+
+  <h2>v0.34.0 &mdash; the gate reads what bash will run, and now.md has one writer</h2>
+
+  <p class="body-text">The gate strips a heredoc body before it matches, because a body is text, not commands. Nine review rounds each found one more line it read differently from bash, and several of those misreads hid a real force-push. <strong>The stripper is an allowlist now:</strong> it strips only after lines whose every token bash reads the same way, and the first line it cannot prove ends the stripping. Over 6,442 real heredoc commands, one is newly blocked and none newly passed, and every rule in it is now seen to fail by a test. It also closes a hole in v0.33.x: with an unquoted delimiter bash runs <code>$(...)</code> and backticks inside the body, so <code>cat &lt;&lt;EOF</code> with a <code>$(git push --force)</code> line passed the gate. Such a body is read now, not stripped. The same was true inside double quotes: the gate erased a whole <code>"..."</code> span as text, so <code>echo "$(git push --force)"</code> passed while bash ran the push. Quotes are read the way bash reads them now, and a <code>$(...)</code> or backtick inside double quotes is checked like any other command. And <code>now.md</code>, the live memory buffer, has one writer: save and rest called it three different ways, so lanes stacked it and the wake greeted a day-old entry. The writer keeps one entry there, puts the history in the daily first, and archives whole anything it would replace that is not already saved.</p>
+
+  <p class="status">v0.34.0 &middot; 2026-10-09 &middot; Apache 2.0</p>
 
   <h2>v0.33.1 &mdash; the macOS leg runs here before it runs in public</h2>
 
@@ -243,5 +249,5 @@ description: "Claude's partner inside Claude Code. No daemon, no database, no ba
 
   <footer>
     <a href="/">&larr; back</a>
-    <span>Maude for Claude &middot; v0.30.1</span>
+    <span>Maude for Claude &middot; v0.34.0</span>
   </footer>
