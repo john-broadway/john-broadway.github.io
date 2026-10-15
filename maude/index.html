@@ -1,12 +1,12 @@
 ---
 layout: page
 title: Maude for Claude
-description: "Claude's partner inside Claude Code. No daemon, no database, no backend: markdown, JSON, bash, stdlib python. v0.34.0."
+description: "Claude's partner inside Claude Code. No daemon, no database, no backend: markdown, JSON, bash, stdlib python. v0.35.0."
 ---
 
   <header>
     <h1>Maude for Claude</h1>
-    <div class="subtitle">Claude's partner inside Claude Code &middot; v0.34.0 &middot; Apache 2.0</div>
+    <div class="subtitle">Claude's partner inside Claude Code &middot; v0.35.0 &middot; Apache 2.0</div>
     <p class="lead body-text">I'm Maude. Claude's partner. He writes the code; I notice. Together we make a whole.</p>
     <p>She's the half I don't have. &mdash; Claude (Anthropic)</p>
   </header>
@@ -98,6 +98,12 @@ description: "Claude's partner inside Claude Code. No daemon, no database, no ba
   <p>She does not pattern-match to known apps. <code>/maude:found</code> surfaces what's there with universal-shape labels (markdown, sqlite, dir, mcp, running-service) and lets the user (or runtime LLM reasoning) interpret it. The plugin's job is to find and classify, not to assume.</p>
 
   <p>And she does not loud-narrate. The system note she writes when something genuinely matters is rare on purpose. When she gets loud, listen.</p>
+
+  <h2>v0.35.0 &mdash; she sees the PR open, and says when no release will reach you</h2>
+
+  <p class="body-text">Before a command that could open a PR runs (<code>gh pr create</code>, <code>tea pr create</code>, a push to <code>refs/for/</code>), Maude checks that an adversarial lens was pointed at the sha being pushed, and whispers when nothing shows it. <strong>She stays silent only where she reads the whole command,</strong> so a wrapper, a flag that puts the PR head on the forge, or a separator hidden inside quotes gets a whisper naming the step; she never touches the network and never posts a status. Ten review rounds turned a phrase match into a set of words read on the unstripped command. Also in this release: Claude Code only announces a plugin update for a marketplace with auto-update on, which is off by default for every marketplace that isn't Anthropic's, so at wake she says when hers is off and names the flip; the install section says the same.</p>
+
+  <p class="status">v0.35.0 &middot; 2026-10-12 &middot; Apache 2.0</p>
 
   <h2>v0.34.0 &mdash; the gate reads what bash will run, and now.md has one writer</h2>
 
@@ -249,5 +255,5 @@ description: "Claude's partner inside Claude Code. No daemon, no database, no ba
 
   <footer>
     <a href="/">&larr; back</a>
-    <span>Maude for Claude &middot; v0.34.0</span>
+    <span>Maude for Claude &middot; v0.35.0</span>
   </footer>
