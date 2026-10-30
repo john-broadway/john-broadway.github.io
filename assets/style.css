@@ -16,7 +16,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { font-size: 16px; }
+html { font-size: 16px; overflow-x: hidden; }
 
 body {
   font-family: var(--sans);
@@ -40,13 +40,13 @@ header {
   padding-bottom: 2rem;
   border-bottom: 1px solid var(--border-soft);
 }
+/* The banner runs edge to edge, out of the 720px text column. */
 .banner {
   display: block;
-  width: 100%;
+  width: 100vw;
+  max-width: none;
   height: auto;
-  border-radius: 6px;
-  border: 1px solid var(--border-soft);
-  margin-bottom: 1.75rem;
+  margin: -4rem 0 2.5rem calc(50% - 50vw);
 }
 h1 {
   font-size: 2.25rem;
@@ -225,4 +225,5 @@ footer a:hover { color: var(--accent); border: none; }
 @media (max-width: 600px) {
   h1 { font-size: 1.75rem; }
   body { padding: 2rem 1rem 4rem; }
+  .banner { margin-top: -2rem; margin-bottom: 2rem; }
 }
