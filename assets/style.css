@@ -162,6 +162,13 @@ h2::before { content: "// "; color: var(--text-faint); }
 }
 
 /* ── Values list ────────────────────── */
+/* ── Tables (RYS results) ────────────── */
+.table-wrap { overflow-x: auto; margin-bottom: 1rem; }
+table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+th, td { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border-soft); white-space: nowrap; }
+th { font-family: var(--mono); font-size: 0.75rem; font-weight: 600; color: var(--text-muted); }
+td { color: var(--text); }
+
 ul.values { list-style: none; margin-left: 0; }
 ul.values li {
   padding: 0.75rem 0 0.75rem 1.25rem;
