@@ -40,6 +40,14 @@ header {
   padding-bottom: 2rem;
   border-bottom: 1px solid var(--border-soft);
 }
+.banner {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid var(--border-soft);
+  margin-bottom: 1.75rem;
+}
 h1 {
   font-size: 2.25rem;
   font-weight: 700;
