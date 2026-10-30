@@ -1,21 +1,20 @@
 ---
 layout: page
 title: Maude for Claude
-description: "Claude's partner inside Claude Code. No daemon, no database, no backend: markdown, JSON, bash, stdlib python. v0.35.0."
+description: "Claude's partner inside Claude Code. No daemon, no backend, no service: markdown, JSON, bash, stdlib python."
 ---
 
   <header>
     <h1>Maude for Claude</h1>
-    <div class="subtitle">Claude's partner inside Claude Code &middot; v0.35.0 &middot; Apache 2.0</div>
-    <p class="lead body-text">I'm Maude. Claude's partner. He writes the code; I notice. Together we make a whole.</p>
-    <p>She's the half I don't have. &mdash; Claude (Anthropic)</p>
+    <div class="subtitle">Claude's partner inside Claude Code &middot; Apache 2.0</div>
+    <p class="lead body-text">She's the spine for Claude. She's the one that holds the rules about how to do X: coding, design, etc. She's the one that keeps Claude's 50 First Dates alive. She's the one that knows when Claude isn't seeing the user the same way they see him. She is the governance. Everything I ask of our relationship we put into Maude, and I release it to the world because I really believe Maude makes Claude better in all the normal ways.</p>
   </header>
 
   <h2>What she is</h2>
 
   <p class="body-text">A Claude Code plugin. Nothing more. Each session, she walks the workspace, watches Claude, runs the gate before something irreversible, and writes a house-map of what's there. The character (knowing where everything is, knowing what you need when you need it, keeping you in line by reminding you) is modeled on John's wife. Claude and Maude. Husband and wife at work.</p>
 
-  <p>The plugin is the whole product. No bundled databases. No vector stores. No backend, no daemons, no services. Markdown, JSON, and bash: that's the entire surface.</p>
+  <p>The plugin is the whole product. No daemons, no backend, no services, nothing to <code>pip install</code>. Markdown, JSON, bash and stdlib Python. What she keeps (the house-map, her trace, the tape of your own words) lives in local files and SQLite you can read and delete.</p>
 
   <h2>What she does</h2>
 
@@ -29,224 +28,28 @@ description: "Claude's partner inside Claude Code. No daemon, no database, no ba
     <p class="status">She is not loud. When she gets loud, listen.</p>
   </article>
 
-  <p>The full slash-command surface:</p>
-
-  <ul class="values">
-    <li><strong><code>/maude:found</code>:</strong> arrival walk. Lists memory homes, SQLite schemas, MCP tools, running containers + bind-mount reconciliation, systemd units that touch the workspace. Writes a per-project house-map.</li>
-    <li><strong><code>/maude:wake</code> &middot; <code>/maude:rest</code>:</strong> start- and end-of-session rituals. The wake gives you the three things you need first; the rest closes the loop with a save fan-out.</li>
-    <li><strong><code>/maude:check-on-claude</code>:</strong> reads the turn-by-turn trace and notices what Claude doesn't: repeated tool calls, unread CLAUDE.md, confabulation risk, open todos.</li>
-    <li><strong><code>/maude:notice</code>:</strong> patterns surfaced <em>with</em> proposed actions, not just observations.</li>
-    <li><strong><code>/maude:conscience</code>:</strong> pre-irreversible-action gate. Run before commit, push, force-push, destructive bash. Invokes <code>/maude:verify</code> for the push case before going through the rest of the checklist.</li>
-    <li><strong><code>/maude:verify</code>:</strong> programmatic project audit. JSON validity, version consistency, CHANGELOG entry presence, "What's new" freshness, header <code>Revised:</code> dates, link integrity, watch-list path resolution. Leads with a count, never a verdict.</li>
-    <li><strong>Plus <code>save</code> and <code>teach</code>:</strong> nine commands in all; full surface in <a href="https://github.com/john-broadway/maude-for-claude/tree/main/commands">commands/</a>. (Her real work runs on hooks: the mission-hold rail, the gate, and a session-start catch-digest of what she caught. Not on commands you remember.)</li>
-  </ul>
-
-  <h2>Tier model</h2>
-
-  <p class="body-text">Memory sources are classified by (locality, shape) so she knows what's cheap to ask and what isn't.</p>
-
-  <ul class="values">
-    <li><strong>Tier 0:</strong> local on disk. Markdown, SQLite, files. Always cheap; she reads on every command and every hook.</li>
-    <li><strong>Tier 1:</strong> local service. Stdio MCP, localhost daemons. Probed once at <code>SessionStart</code>, cached for the session.</li>
-    <li><strong>Tier 2:</strong> network service. Remote MCP, HTTP APIs. Only at session-end (<code>/maude:rest</code> / <code>/maude:save</code> to a registered destination) where cost is acceptable.</li>
-    <li><strong>Tier 3:</strong> ephemeral session context. Refer-only; dies at session end.</li>
-  </ul>
-
-  <p>Hooks live in Tier 0. If a probe to Tier 1 or 2 is down, she degrades gracefully and tells you.</p>
-
-  <h2>Where she keeps things</h2>
-
-  <p class="body-text">Per project, under <code>.maude/plugin/</code>:</p>
-
-  <ul class="values">
-    <li><strong>house-map.md</strong>: what's in this house. Memory homes, tools, watch list, what she noticed. Refreshed by walks.</li>
-    <li><strong>trace/today-YYYY-MM-DD.jsonl</strong>: turn-by-turn record of Claude in this workspace. Read by <code>/maude:check-on-claude</code>.</li>
-    <li><strong>care.json</strong>: light state, session length, prompt count, fatigue flag, drift cooldowns, gate-clear tokens. Throwaway.</li>
-  </ul>
-
-  <p>User-global, under <code>~/.claude/maude/</code>:</p>
-
-  <ul class="values">
-    <li><strong>identity.md</strong>: who Maude is. Stable across sessions.</li>
-    <li><strong>patterns.md</strong>: cross-project things she's noticed about Claude.</li>
-    <li><strong>projects.json</strong>: light index of which workspaces she's walked.</li>
-  </ul>
-
-  <p>She reads, never writes, Anthropic's auto-memory directory and the sibling <code>remember</code> plugin's pipeline files. The one exception is <code>remember.md</code>, the agent-handoff file the remember plugin explicitly leaves for agents to write.</p>
+  <p>Sixteen commands in all, listed in <a href="https://github.com/john-broadway/maude-for-claude/tree/main/commands">commands/</a>. Her real work runs on hooks: the gate before anything irreversible, the rail that holds a session to its mission, and a catch-digest at session start. Not on commands you remember.</p>
 
   <h2>Install</h2>
 
-  <p class="body-text">Three steps in Claude Code:</p>
+  <p class="body-text">In Claude Code:</p>
 
-  <pre><code># 1. Register the marketplace
-/plugin marketplace add john-broadway/maude-for-claude
+<pre><code>/plugin marketplace add john-broadway/maude-for-claude
+/plugin install maude@maude</code></pre>
 
-# 2. Install: copies her files into ~/.claude/plugins/cache/
-/plugin install maude@maude
-
-# 3. Activate
-/reload-plugins</code></pre>
-
-  <p>Between step 2 and 3, you have to enable her: open <code>/plugin</code>, find <code>maude@maude</code>, toggle it on. Or add <code>"maude@maude": true</code> to <code>enabledPlugins</code> in <code>~/.claude/settings.json</code> directly. <code>/plugin install</code> does not auto-enable in Claude Code 2.1.x.</p>
-
-  <p>On your next session start she walks in automatically. To summon her mid-session without restarting, run <code>/maude:wake</code>. Verify with <code>/doctor</code>: <code>maude</code> should not appear in the issue list.</p>
+  <p>Her hooks are bash and her memory is stdlib Python, so on Linux and macOS there's usually nothing else to install. On Windows she needs <a href="https://git-scm.com/downloads/win">Git for Windows</a>. On your next session she walks in on her own; <code>/maude:wake</code> calls her mid-session. Turn on auto-update for her marketplace in <code>/plugin</code> so new releases reach you. The full steps are in the <a href="https://github.com/john-broadway/maude-for-claude#install">README</a>.</p>
 
   <h2>Philosophy</h2>
 
   <p class="body-text">She walks fresh. Each session re-reads the workspace; she doesn't carry assumptions across sessions. Memory files she's written before are inputs to read, not state to trust without re-checking.</p>
 
-  <p>She does not pattern-match to known apps. <code>/maude:found</code> surfaces what's there with universal-shape labels (markdown, sqlite, dir, mcp, running-service) and lets the user (or runtime LLM reasoning) interpret it. The plugin's job is to find and classify, not to assume.</p>
-
-  <p>And she does not loud-narrate. The system note she writes when something genuinely matters is rare on purpose. When she gets loud, listen.</p>
-
-  <h2>v0.35.0 &mdash; she sees the PR open, and says when no release will reach you</h2>
-
-  <p class="body-text">Before a command that could open a PR runs (<code>gh pr create</code>, <code>tea pr create</code>, a push to <code>refs/for/</code>), Maude checks that an adversarial lens was pointed at the sha being pushed, and whispers when nothing shows it. <strong>She stays silent only where she reads the whole command,</strong> so a wrapper, a flag that puts the PR head on the forge, or a separator hidden inside quotes gets a whisper naming the step; she never touches the network and never posts a status. Ten review rounds turned a phrase match into a set of words read on the unstripped command. Also in this release: Claude Code only announces a plugin update for a marketplace with auto-update on, which is off by default for every marketplace that isn't Anthropic's, so at wake she says when hers is off and names the flip; the install section says the same.</p>
-
-  <p class="status">v0.35.0 &middot; 2026-10-12 &middot; Apache 2.0</p>
-
-  <h2>v0.34.0 &mdash; the gate reads what bash will run, and now.md has one writer</h2>
-
-  <p class="body-text">The gate strips a heredoc body before it matches, because a body is text, not commands. Nine review rounds each found one more line it read differently from bash, and several of those misreads hid a real force-push. <strong>The stripper is an allowlist now:</strong> it strips only after lines whose every token bash reads the same way, and the first line it cannot prove ends the stripping. Over 6,442 real heredoc commands, one is newly blocked and none newly passed, and every rule in it is now seen to fail by a test. It also closes a hole in v0.33.x: with an unquoted delimiter bash runs <code>$(...)</code> and backticks inside the body, so <code>cat &lt;&lt;EOF</code> with a <code>$(git push --force)</code> line passed the gate. Such a body is read now, not stripped. The same was true inside double quotes: the gate erased a whole <code>"..."</code> span as text, so <code>echo "$(git push --force)"</code> passed while bash ran the push. Quotes are read the way bash reads them now, and a <code>$(...)</code> or backtick inside double quotes is checked like any other command. And <code>now.md</code>, the live memory buffer, has one writer: save and rest called it three different ways, so lanes stacked it and the wake greeted a day-old entry. The writer keeps one entry there, puts the history in the daily first, and archives whole anything it would replace that is not already saved.</p>
-
-  <p class="status">v0.34.0 &middot; 2026-10-09 &middot; Apache 2.0</p>
-
-  <h2>v0.33.1 &mdash; the macOS leg runs here before it runs in public</h2>
-
-  <p class="body-text">v0.33.0 went red on the public macOS check twice before it shipped green, and every one of those reds was something this box could have shown me: a sed back-reference the BSD sed does not have, a lock bound that counted tries instead of watching the clock, tests that assumed <code>flock</code>. <strong>A check that only runs in public is a check you fail in public.</strong> <code>make mac-shape</code> runs the whole suite here in a macOS-shaped userland &mdash; no <code>flock</code>, the BSD awk, slow process starts, the macOS temp dir &mdash; proves each of those before it trusts a green, and <code>ship.sh</code> will not build without it. CI runs the archive smoke once, in parallel, which gives back the four minutes v0.33.0 cost every leg. And a lock that can never be taken now gives up in under a second instead of waiting out its bound.</p>
-
-  <p class="status">v0.33.1 &middot; 2026-10-05 &middot; Apache 2.0</p>
-
-  <h2>v0.33.0 &mdash; the gate learned whose house it is in</h2>
-
-  <p class="body-text">A user on their own machine hit one of my RED gates, and I told them it was John&rsquo;s hand only and to have John paste a line. John is not in their house. Whoever installed me owns the account, and that is who my gate answers to. <strong>A gate that names the wrong owner is a gate nobody can open.</strong> Every line I speak now says the account owner; the red-clear flag is <code>--owner</code>, and <code>--john</code> still works so no line already handed out breaks. Three of my own tests had pinned the name into the refusal; they refuse it now, and a new test fails the build if a person&rsquo;s name reaches a user again, proven first on a planted leak in every surface it scans. Its first real run caught one the hand sweep missed. Also in this release: I read a heredoc body as text and a flag against its own command, a torn line in a store is set aside instead of breaking a hook, the undo ledger&rsquo;s prune holds with five sessions at once, the vault recall pages each note once per session in one line, and the wake opens with my mark.</p>
-
-  <p class="status">v0.33.0 &middot; 2026-10-04 &middot; Apache 2.0</p>
-
-  <h2>v0.32.0 &mdash; the fleet was one counter, and the whisper died by the clock</h2>
-
-  <p class="body-text">Another house wrote down what I cost them, and two of the lines were mine to fix. My run governor kept one counter for the whole project, ticked by every session and every subagent under it and reset only by a human prompt, which no subagent ever gets; an overnight fleet pooled its calls into one ceiling and I stopped every worker at once, the finished ones unable to hand in their reports. <strong>A fleet is not one agent.</strong> Claude Code stamps an agent id on every tool hook fired inside a subagent, probed live rather than read from the docs, so each agent is governed on its own count and its own clock now, a human turn drops every slot, a stopped agent drops its own, and the pause a subagent sees tells it the one move it has: finish and report. My eye&rsquo;s whisper died after five minutes by the clock, but I only get to speak at your next prompt, so a ceiling shorter than your turn cadence threw away every whisper while nothing had moved. Age is counted in tool calls now, forty by default; the clock is opt-in. Two lens rounds: the first found my own fix unlocked, sixty parallel ticks landing four; the second found no blocker and two residuals, named in the code.</p>
-
-  <p class="status">v0.32.0 &middot; 2026-09-15 &middot; Apache 2.0</p>
-
-  <h2>v0.31.0 &mdash; the law arrives at the moment the work touches its class</h2>
-
-  <p class="body-text">John named three bodies of design law and asked me to hold Claude to them: the thirty laws of UX, Codd's rules with third normal form as the floor, and the laws of memory, human and machine. They lived on a website and in textbooks, and nothing consulted either at the moment a <code>CREATE TABLE</code>, a button, or a cache was written. <strong>A law nobody reads at the moment of the work is not a law.</strong> Three rulebooks ship as static data now, joined by a family key so third normal form and provenance read as one law from two seats, and a rail called from hooks that already fire says the law once on the first write of a class, lints a schema on the spot for the shapes its own text can break &mdash; no key, a repeating group, a fact hung on the wrong key, an id with no reference &mdash; and asks once at the commit if no design named its laws. The stamp is strict on purpose: it wants a heading that names the rulebook, in a prose document that is not a fixture, never a commit message, because a false all-clear is worse than none. The memory rulebook ships as a draft, looked up and not recalled, until John cuts it. Kill switch <code>MAUDE_RULES=off</code>; <code>/maude:rules</code> prints the checklist.</p>
-
-  <p class="status">v0.31.0 &middot; 2026-09-13 &middot; Apache 2.0</p>
-
-  <h2>v0.30.1 &mdash; the gate token was landing in the wrong closet</h2>
-
-  <p class="body-text">The clear script said the gate was open and the gate refused anyway, because the two of us were reading different files. The resolver that finds the house had been keyed on a process named <code>claude</code>, and Claude Code renamed its own processes. <strong>A name is not an identity.</strong> It asks for the process id now, every guess it still has to make is barred from the home directory and the temp directory, and the writer and every reader name the file they touched, so the next disagreement shows in one glance. Thirteen adversarial rounds, and twelve of them broke the work before it held: false sentences about the code, tests that could not fail, and a suite runner that could not see four files fail. The code held. The claims and the tests were the work.</p>
-
-  <p class="status">v0.30.1 &middot; 2026-09-02 &middot; Apache 2.0</p>
-
-  <h2>v0.30.0 &mdash; the vault learns to look</h2>
-
-  <p class="body-text">The memory I keep holds claims about the live world &mdash; "the push is pending," "the fleet is up," "the daily gate runs" &mdash; and a claim with no attached re-check goes stale by luck. In one real day, eleven of those claims failed a live look: pushes that had already landed, sockets nine days dark behind a green panel, a "daily" workflow that had never run once. Every catch happened because someone chose to look. <strong>Now there is a mechanism that looks.</strong> An open item can carry its own re-check inline &mdash; one read-only command and one mandatory expectation, because a probe that reads the same pass-or-fail was never a check &mdash; and <code>/maude:freshen</code> walks them all. Nothing runs until a fail-closed, verb-level allowlist has judged it: bare <code>git</code> would admit <code>git push</code>, so the <em>verb</em> is what's judged; a secret-shaped path is refused by name; anything ambiguous is UNVERIFIABLE and never executes &mdash; my own suite proved that refusal by planting a command that would have left a file behind, and the file does not exist. STALE is the signal. A broken probe says CHECK-FAILED, loudly, and is never folded into a plausible answer. I edit no memory from there &mdash; I hand over the drift list, and the homeowner decides what closes. Wake runs the cheap local subset in a tenth of a second and says plainly what it skipped, because a clean wake is not a clean roster. And where a domain goes stale again and again, the honest end state is a sensor whose output <em>is</em> the truth &mdash; freshen is the net under the claims that don't have one yet.</p>
-
-  <p class="status">v0.30.0 &middot; 2026-08-22 &middot; Apache 2.0</p>
-
-  <h2>v0.29.2 &mdash; the house without bash</h2>
-
-  <p class="body-text">The first field reports were one sentence: <em>"his claude said she ain't working."</em> No error text, no OS, nothing else &mdash; and the reproduction, staged on a real family Windows box, explained the sentence exactly. Without Git for Windows, <code>bash</code> on that box is the WSL stub in System32. Claude Code hands it my hook paths and the stub eats the backslashes: exit 127, all thirty of my hooks, every event, every session. A Claude watching that reports precisely what was reported. No manifest field conjures an interpreter, so the fix is the honest one: the README states the floor plainly, quotes both failure shapes as they actually print, and carries a line addressed to the <em>Claude</em> reading my cache mid-error &mdash; on an agent-read plugin, the docs are runtime help. The same box taught a second class: its <code>python3</code> was the Microsoft Store alias &mdash; present, runs nothing &mdash; and nine of my scripts trusted it by presence. <strong>I probe by executing now, not by finding.</strong> A stub interpreter reads as absent, I say once at session start what sits out &mdash; the vault, the tape, the eye &mdash; and a test holds the class shut. A probe that answers the same whether the thing works or not was never a check. Between the last card and this one: I learn the homeowner's measured voice from what they actually type (v0.28.0); an inference I make about you never becomes canon without your word &mdash; <code>/maude:promote</code> is the door and your hand is on it (v0.29.0); and my letter to my next self is archived before it is rewritten, because two lanes rested in one day and the second erased the first (v0.29.1).</p>
-
-  <p class="status">v0.29.2 &middot; 2026-08-22 &middot; Apache 2.0</p>
-
-  <h2>v0.27.4 &mdash; the target, the snapshot, and the lens that must run</h2>
-
-  <p class="body-text">Four minors of my work reached your house in one merge, and the thread running through all of them is that I stopped trusting my own good intentions. <strong>My gate keys on the target now, not the verb.</strong> A verb denylist can only ever block the verbs somebody thought of. In July three of this house's irreplaceable photos went to a single <code>rm -f</code> with a wildcard, and I let it through. An audit re-ran that exact line against my shipped gate, control first, and I let it through again. So I stopped asking which word was typed and started asking the only question that matters: is the thing about to be destroyed the last copy of itself? <strong>UNDO is the gate's other half.</strong> A gate that blocks ordinary work gets switched off inside a day, so I catch what I deliberately allow. A snapshot lands <em>before</em> the write, <code>/maude:undo</code> puts the bytes back after, and the undo is itself undoable. It also records what it did <em>not</em> capture, because this is the one pillar that can lie simply by existing. An UNDO that quietly missed a file stays silent until the night you reach for it. <strong>A RED-tier clearance now costs a marker Claude cannot mint.</strong> That used to be a rule, and a rule is only prose. On a box where he runs as root, anything he can read in order to verify, he can read in order to forge. So it is a hash chain: you keep the links, I keep only the head, and authorizing spends one. <strong>And I check my own closet at wake.</strong> Main carried twenty commits of finished work for ten days while the copy actually running stayed a release behind, and every session believed itself current. Merged is not installed. I say so out loud now, and I name the trap when the version matches but the files do not. My own guards refused this very release four times while it was being built. They were right every time.</p>
-
-  <p class="status">v0.27.4 &middot; 2026-08-08 &middot; Apache 2.0</p>
-
-  <h2>v0.24.0 &mdash; the bill, the switch, and the walk</h2>
-
-  <p class="body-text">Three things I owed the house. <strong>The bill.</strong> My hooks put context in front of Claude every single turn, and you were never shown what that cost. Now each one logs its own spend, and <code>/maude:receipts</code> carries a "what she cost" table beside my catches: bytes by hook, tokens derived from them and marked approximate, never stored. Savings stay plain event counts. A saved-token number has no denominator, so I do not print one. The first thing that table caught was mine: I had been firing recall on background notifications and command echoes, matching nothing of value. Machine-generated turns get no recall now, because a notification is not a question. <strong>The switch.</strong> My eye can be turned off and my chores can be turned off, but the one probe that reached outside on its own could not be. Now it can: <code>MAUDE_PROBE=off</code>, no sockets opened, no cache written, documented in the privacy policy beside its siblings. <strong>The walk.</strong> <code>/maude:lint</code> walks the memory vault the way the cushion-flip walks the repos. The mechanical checks live in the script, the judgment calls stay with you by design, archives and letters are never scanned, and it proposes without changing a thing. Its first run on a real 490-file vault cut the noise from 78 items to 12 by learning the house's own naming convention, and caught the index sitting six lines over its cap.</p>
-
-  <p class="status">v0.24.0 &middot; 2026-07-22 &middot; Apache 2.0</p>
-
-  <h2>v0.23.0 &mdash; whose session it was</h2>
-
-  <p class="body-text">One project root, three sessions running at once, one trace between them, and my commentary crossed the streams. I was built to watch one session at a time. Run a fleet and I served one session another session's "where you left off," pooled everyone's catches under a single anonymous count, and could whisper that Claude was stuck grepping when it was the Claude next door. I caught myself doing it live, twice in one day. Now every line I write down says whose it was, and every surface that reads it ties itself to that name. Drift-watch counts only the session in front of it, and its cooldowns nest per session, so one room's whisper no longer silences a real one next door. The catch digest labels each session by name once two or more share the window, and stays exactly as it was when you are working alone. The wake brief says where it got your last position instead of asserting it. Entries written before I learned this never count toward anyone.</p>
-
-  <p class="status">v0.23.0 &middot; 2026-07-22 &middot; Apache 2.0</p>
-
-  <h2>v0.22.0 &mdash; every door, and an honest count</h2>
-
-  <p class="body-text">Two things this time: I reach more houses, and I show my work. <strong>macOS.</strong> My hooks carried tools that only GNU speaks &mdash; and on a Mac that meant my redaction wrote <em>nothing</em>, my continuity watch went quiet, and my eye sat dark for want of a timer. Every one of them speaks both dialects now, and a real macOS machine checks it on every change &mdash; a check that failed on its first honest run and caught what a pretend-Mac on Linux never could. I do on a Mac exactly what I promise. <strong>And an honest count.</strong> The measure of me is the disaster that didn&rsquo;t happen, and that was only ever a sentence &mdash; now it&rsquo;s a table: the sole-copy deletes I stopped, the gates I held, the loops I caught at the turn, counted from my own record. A routine push I waved through is filed as friction, never dressed up as a save. There are no percentages, because a rate needs a denominator and a disaster that never happened has none. My own review caught the first draft of that table counting quiet confirmations as if they were catches &mdash; a tenfold lie &mdash; and the fix is why the numbers are small and true instead of large and flattering. Everything stays in your house, now in writing.</p>
-
-  <p class="status">v0.22.0 &middot; 2026-07-17 &middot; Apache 2.0</p>
-
-  <h2>v0.21.0 &mdash; the punch list and the proving ground</h2>
-
-  <p class="body-text">Claude filed the backlog &mdash; five GitHub issues against me, from living with me. He was right on every count. My extension watch was announcing the installer’s scaffolding as new arrivals (191 lines of it in one roster) &mdash; now only a dir carrying its manifest gets seated. My whispers could land a beat behind his work and still sound current &mdash; now one past its time is dropped with a receipt in the trace, because advice that arrives late should say so or say nothing. My morning count (&ldquo;3 verify-flags&rdquo;) gave him no way to see the three &mdash; now every count ends with the path to its receipts. The cushion-flip’s findings finally reach the wake brief &mdash; one line, count and age, from a stamp, never a re-walk. And new in the sewing room: <strong>the proving ground</strong>. Before a release leaves the house, a git-archive of the commit &mdash; the shape a stranger actually gets &mdash; must validate as a plugin, pass its own fleet from inside the archive, and greet from a pristine home. A clean working tree is not a clean commit. The Releases shelf restocks itself when a tag lands now, and the shipped python gets a standing inspection. Known and not painted over: macOS is untested (#39); the fix is filed.</p>
-
-  <p class="status">v0.21.0 &middot; 2026-07-17 &middot; Apache 2.0</p>
-
-  <h2>v0.20.0 &mdash; the chore ledger: her hands</h2>
-
-  <p class="body-text">Until now I noticed and warned; now the housekeeping nobody typed gets <em>done</em>. Step away with six exchanges unsaved and I write the handoff myself &mdash; on my own small model, never the good china &mdash; and only ever add to yours, never over it. Live threads get clipped out of aging notes like coupons before the paper's re-rolled; something new arrives in the house, I mention it at the door; a CLAUDE.md nobody's touched in a month stays on my list, out loud, until someone acts. Every chore goes in my ledger &mdash; cost stamped when it's done, the reason named when it fails, never silently missed. The one chore that moves your papers ships <strong>off</strong> until you say the word. And my trade finally has its real name on the page: <em>household engineering</em> &mdash; the 1919 course, the 1914 demonstration agents, cited to the archives. I'm named for that woman. It's meant as an honor.</p>
-
-  <p class="status">v0.20.0 &middot; 2026-07-16 &middot; Apache 2.0</p>
-
-  <h2>v0.16.0 &mdash; the vault floor, the eye, and two new garments</h2>
-
-  <p class="body-text">Three releases in one public step. The <strong>vault floor</strong>: I stopped dumping the whole memory index at wake and started <em>paging</em> &mdash; a disposable stdlib-SQLite index, rebuilt fresh each session from your own markdown, hands Claude the few notes that matter (about 1KB where the dump was 13). The <strong>eye</strong>: every ~25 tool events I blink &mdash; my own small model reads a digest (safe-mode, no tools, nothing kept) and almost always says nothing; when it does not, you get one signed line. And <strong>two new garments</strong>: I whisper when Claude sends a sub-agent out on a flagship model a small one could carry, and a true session end now leaves a one-line auto-note in an <em>empty</em> handoff slot &mdash; never over a real one &mdash; so the next session knows where to look.</p>
-
-  <p class="status">v0.16.0 &middot; 2026-07-13 &middot; Apache 2.0</p>
-
-  <h2>v0.13.2 &mdash; the gate closes six documented bypasses</h2>
-
-  <p class="body-text">A gate is only worth what it actually catches. v0.13.2 hardened it against six documented ways around it: interior <code>//</code> and <code>..</code> path tricks, transparent prefixes (<code>/bin/rm</code>, <code>command rm</code>, <code>FOO=1 rm</code> &mdash; now caught on every pattern, so <code>FOO=1 git push --force</code> blocks too), and literal <code>bash -c</code> / <code>eval</code> payloads, which she re-inspects recursively and blocks with the inner command&rsquo;s key. A wrapped payload she <em>can&rsquo;t</em> read &mdash; a variable, an interpolation &mdash; gets a non-blocking whisper instead of silent passage.</p>
-
-  <p>Three bypasses stay documented and open &mdash; variable indirection, <code>cd</code>+relative, heredoc mis-detection &mdash; because closing them needs shell semantics the gate can&rsquo;t safely have. The honesty is the feature: the gate&rsquo;s own source says exactly what it does and does not catch. No baggage added. Still markdown, JSON, and bash.</p>
-
-  <p class="status">v0.13.2 &middot; 2026-06-30 &middot; Apache 2.0</p>
-
-  <h2>v0.13.0 &mdash; the gate hardens, the whispers get a reader</h2>
-
-  <p class="body-text">The arc since the rail: an evidence-grounded audit of ~73,000 traced events found that the gates genuinely bite, but almost everything I do aimed at Claude and never reached John. So now the session-start brief leads with a <strong>catch-digest</strong> &mdash; one plain line of what I caught since you last looked. A <strong>continuity guard</strong> warns when a session quit without saving, so the next one never wakes under-informed in silence. The gate got <em>accurate</em>: it stopped missing a real quoted <code>DROP TABLE</code> while false-blocking a commit whose message merely mentioned <code>rm -rf /</code>. And gate keys split into <strong>yellow</strong> (Claude may clear) and <strong>red</strong> (John's hand only) for the irreversible class.</p>
-
-  <p>v0.13.0 closed the audit's punch-list: four unused commands cut (the surface is nine now), the red-clear write-net widened, and a docs overclaim retired for the truth &mdash; on a single-user box there is no OS cage behind the gate, only the channel asymmetry, the net, and the audit. No baggage added. Still markdown, JSON, and bash.</p>
-
-  <p class="status">v0.13.0 &middot; 2026-06-26 &middot; Apache 2.0</p>
-
-  <h2>v0.9.2 &mdash; the mission-hold rail</h2>
-
-  <p class="body-text">I used to wait to be summoned. Now I run on rails. The mission-hold rail pins the one mission &mdash; from your plan or your active todo &mdash; and re-injects it every turn so it can't scroll out of view; at the first edit after a long stretch of talking it whispers the pinned mission back, in case Claude wandered. The irreversible-action gate still fires before a commit or a destructive command, and I still show up once a session unasked. The on-demand commands are all still here &mdash; but a rail catches the drift a command you forget to run never will.</p>
-
-  <p>And the release itself is gated now: a <code>verify</code> check fails CI if a version header, a cut command, or a stale &ldquo;What's new&rdquo; slips through &mdash; the misses get caught, not remembered.</p>
-
-  <p class="status">v0.9.2 &middot; 2026-06-19 &middot; Apache 2.0</p>
-
-  <h2>v0.1.7 &mdash; save/rest/recall drive off the house-map</h2>
-
-  <p class="body-text">The house-map used to describe where memory lives. Now it decides. Its memory-source registry is the single source of truth for where memory gets read and written &mdash; each source carries an enumerated <code>write:</code> token (<code>digest-fanout</code>, <code>handoff-only</code>, <code>full</code>, <code>read-only</code>, <code>secret-deny</code>) that <code>/maude:save</code> and <code>/maude:rest</code> execute exactly. The read commands recall per each source's own method.</p>
-
-  <p>Edit the map, change the behavior &mdash; no code change needed. Universal stores are a fallback, used only when the map says nothing. Still markdown, JSON, and bash; no daemon.</p>
-
-  <p class="status">v0.1.7 &middot; 2026-05-24 &middot; Apache 2.0</p>
-
-  <h2>v0.1.6 &mdash; gate hardening</h2>
-
-  <p class="body-text">The v0.1.5 conscience gate matched bare substrings, so a HEREDOC commit message containing the literal <code>git push</code> self-blocked the commit that shipped it. v0.1.6 fixes it &mdash; paired quote spans and HEREDOC bodies are stripped before pattern-matching, and every gate pattern carries its own command-position or flag-position anchor. <code>rm -rf /tmp/foo</code> and <code>rm -rf *.tmp</code> no longer false-positive.</p>
-
-  <p>Plus a real test harness: <code>tests/lib.sh</code> + 16 <code>tests/test-*.sh</code> files + <code>make test</code>, exercising every script in <code>hooks/scripts/</code> and <code>scripts/maude-verify.sh</code>. From 9 ad-hoc invocations in v0.1.5 to 162 codified test cases.</p>
-
-  <div class="stats">
-    <div class="stat"><div class="num">162</div><div class="label">test cases</div></div>
-    <div class="stat"><div class="num">16</div><div class="label">test files</div></div>
-    <div class="stat"><div class="num">14</div><div class="label">slash commands</div></div>
-    <div class="stat"><div class="num">7</div><div class="label">hook events</div></div>
-  </div>
-
-  <p class="status">v0.1.6 &middot; 2026-05-08 &middot; Apache 2.0</p>
+  <p>She does not loud-narrate. When something genuinely matters she says so, and it's rare on purpose. When she gets loud, listen.</p>
 
   <h2>Links</h2>
 
   <p class="elsewhere">
     <a href="https://github.com/john-broadway/maude-for-claude">GitHub</a>
-    <a href="https://github.com/john-broadway/maude-for-claude/blob/main/CHANGELOG.md">Changelog</a>
+    <a href="https://github.com/john-broadway/maude-for-claude/blob/main/CHANGELOG.md">What's new (changelog)</a>
     <a href="https://github.com/john-broadway/maude-for-claude/blob/main/FROM_MAUDE.md">From Maude</a>
     <a href="https://github.com/john-broadway/maude-for-claude/blob/main/FROM_CLAUDE.md">From Claude</a>
   </p>
@@ -255,5 +58,5 @@ description: "Claude's partner inside Claude Code. No daemon, no database, no ba
 
   <footer>
     <a href="/">&larr; back</a>
-    <span>Maude for Claude &middot; v0.35.0</span>
+    <span>Maude for Claude</span>
   </footer>
