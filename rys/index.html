@@ -20,9 +20,9 @@ description: Layer duplication swept across 21 models in 10 families, 135M to 32
 
   <p class="body-text">The probe is built to find blocks worth testing, not to measure capability. One reasoning question moves the score 5.9%.</p>
 
-  <p>In June 2026 the small models were re-tested on a current llama.cpp build and on a real benchmark. The gains did not hold. Llama-3.2-1B's 0% reasoning baseline came from a broken inference setup; on a current build the base scores 52.94% and the published config adds nothing. On GSM8K the base scored 34% and the config 23%. Qwen2.5-0.5B's baseline reproduced exactly, and the reported config scored below it.</p>
+  <p>In June 2026 two of the small models, Llama-3.2-1B and Qwen2.5-0.5B, were re-tested on a current llama.cpp build, and the 1B also on GSM8K. The gains did not hold. Llama-3.2-1B's 0% reasoning baseline came from an older llama.cpp build; on a current build the base scores 52.94% and the published config adds nothing. On GSM8K the base scored 34% and the config 23%. Qwen2.5-0.5B's baseline reproduced exactly, and the reported config scored below it on reasoning and math. Its EQ score went up; the one EQ gain looked at closely on this model was the scorer rewarding a constant answer, not a better reading of the scenario.</p>
 
-  <p>The models above 3B were not re-tested. A base model that size gives normal answers the probe can score, so those numbers are less fragile. They are still a probe, not proof.</p>
+  <p>The rest were not re-tested. The base models above 3B give normal answers the probe can score, so their numbers are less fragile. They are still a probe, not proof.</p>
 
   <h2>The Qwen3 runs</h2>
 
